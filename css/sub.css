@@ -135,22 +135,19 @@
   .intro_con img {
     height: 300px;
   }
-  .intro_con div{
-    margin: 50px auto !important;
-  }
 }
 
 
-.intro_con div{
+.intro_con .intro_text{
   margin: 0 auto;
   padding: 20px;
 }
-.intro_con h2{
+.intro_con .intro_text h2{
   margin: 40px 0px;
   font-size: var(--fs-large);
   font-weight: var(--fw-bold);
 }
-.intro_con p{
+.intro_con .intro_text p{
   line-height: 160%;
   font-size: var(--fs-medium);
   font-weight: var( --fw-light);
