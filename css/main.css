@@ -1,0 +1,944 @@
+@charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+li {
+  list-style: none;
+}
+
+body {
+  font-family: "Pretendard", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  text-rendering: geometricPrecision;
+  margin-bottom: 60px; /* 바텀바 높이만큼 띄우기 */
+}
+
+@media (min-width: 1025px) {
+  body {
+    margin-bottom: 0px;
+  }
+}
+main {
+  margin-top: 70px; /* 헤더 높이만큼 띄우기 */
+}
+
+html {
+  font-size: 16px;
+}
+
+/* 화면 크기가 375px 미만일 때 기본 폰트 크기를 14px로 조정 */
+.cart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 10%;
+  min-width: 30px;
+  max-width: 50px;
+}
+.cart img {
+  width: 100%;
+}
+
+.star {
+  white-space: nowrap;
+}
+.star i {
+  color: #EF2F15;
+  opacity: 0.2;
+}
+.star i.active {
+  opacity: 1;
+}
+
+.tab {
+  width: 100%;
+}
+.tab > ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.tab > ul li {
+  width: 100%;
+}
+.tab > ul li button {
+  width: 100%;
+  padding: 10px 20px;
+  border: 1px solid #D9D9D9;
+  background: #D9D9D9;
+  cursor: pointer;
+}
+.tab > ul li button.active {
+  background: #ffffff;
+  border-bottom: none;
+}
+.tab .tab_con {
+  background: #ffffff;
+}
+.tab .tab_con > div {
+  display: none;
+}
+.tab .tab_con > div.active {
+  display: block;
+}
+
+.list {
+  border-radius: 0;
+  width: 100%;
+}
+.list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+.list li span:first-child {
+  width: 60px;
+}
+.list li span:last-child {
+  opacity: 0;
+  background: #EF2F15;
+  color: #ffffff;
+  font-size: 1rem;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 5px;
+  text-align: center;
+  margin-left: auto; /* N표시 오른쪽 정렬 */
+}
+.list li span:last-child.active {
+  opacity: 1;
+}
+
+.button, .btn-box-l .btn-l, .btn-box-s .btn-s {
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border: none;
+  border-radius: 5px;
+}
+.button:hover, .btn-box-l .btn-l:hover, .btn-box-s .btn-s:hover {
+  filter: brightness(90%);
+}
+.button:nth-child(1), .btn-box-l .btn-l:nth-child(1), .btn-box-s .btn-s:nth-child(1) {
+  background: #EF2F15;
+  color: #ffffff;
+}
+.button:nth-child(2), .btn-box-l .btn-l:nth-child(2), .btn-box-s .btn-s:nth-child(2) {
+  background: #D9D9D9;
+  color: #000000;
+}
+
+.btn-box-s {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+.btn-box-s .btn-s {
+  width: 50%;
+}
+.btn-box-s .btn-s.line {
+  border: 1px solid #EF2F15;
+  background: #ffffff;
+  color: #EF2F15;
+}
+.btn-box-s .btn-s.fill {
+  background: #EF2F15;
+  color: #ffffff;
+}
+.btn-box-s .btn-s.gray {
+  background: #D9D9D9;
+  color: #000000;
+}
+
+.btn-box-l {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.btn-box-l .btn-l.line {
+  border: 1px solid #EF2F15;
+  background: #ffffff;
+  color: #EF2F15;
+}
+.btn-box-l .btn-l.fill {
+  background: #EF2F15;
+  color: #ffffff;
+}
+.btn-box-l .btn-l.gray {
+  background: #D9D9D9;
+  color: #000000;
+}
+
+.card-list {
+  width: 100%;
+}
+.card-list li {
+  border: 1px solid #D9D9D9;
+  border-radius: 5px;
+  margin-bottom: 16px;
+  padding: 10px;
+}
+.card-list li > div:first-of-type {
+  display: flex;
+  justify-content: space-between;
+}
+.card-list li > div:first-of-type > a {
+  display: block;
+  width: 50%;
+  max-width: 400px;
+  max-height: 150px;
+  min-height: 100px;
+}
+.card-list li > div:first-of-type img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 5px;
+}
+.card-list li > div:first-of-type > div {
+  width: 70%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.card-list li > div:first-of-type > div h2 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.card-list li > div:first-of-type > div > p {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.card-list li > div:first-of-type > div > p span {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #EF2F15;
+  white-space: nowrap;
+}
+.card-list li > div:first-of-type > div > div {
+  margin-top: auto; /* 바닥정렬 */
+  display: flex;
+  gap: 10px;
+}
+.card-list li > div:first-of-type > div > div > span {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.card-list li > div:first-of-type .cart {
+  margin-top: auto;
+  top: unset;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+}
+.card-list li > div:first-of-type .cart img {
+  width: 100%;
+}
+
+.checkmark-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+}
+.checkmark-container svg {
+  width: 100px;
+  height: 100px;
+}
+.checkmark-container svg .circle {
+  fill: none;
+  stroke: #EF2F15;
+  stroke-width: 7;
+}
+.checkmark-container svg .checkmark {
+  width: 100px;
+  height: 100px;
+  stroke-width: 7;
+  stroke: #EF2F15;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: drawCheck 1s ease-out forwards;
+  transform: scale(0.9);
+  transform-origin: center;
+}
+
+@keyframes drawCheck {
+  0% {
+    stroke-dasharray: 100px;
+    stroke-dashoffset: 100px;
+  }
+  100% {
+    stroke-dasharray: 100px;
+    stroke-dashoffset: 0;
+  }
+}
+.card-list-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px 15px;
+  margin: 0;
+}
+.card-list-box > div {
+  position: relative;
+  padding: 0;
+  box-sizing: border-box;
+}
+.card-list-box > div a > img {
+  width: 100%;
+  border-radius: 10px;
+  height: 160px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.card-list-box > div .cart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  cursor: pointer;
+}
+.card-list-box > div a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.card-list-box > div a .con-text .con-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 140%;
+  margin-top: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: normal;
+}
+.card-list-box > div a .con-text .con-sub {
+  font-size: 1rem;
+  margin-top: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  white-space: normal;
+}
+
+.bread_c {
+  font-size: 1rem;
+  font-weight: 400;
+  padding-top: 13px;
+}
+
+/* -------공통 서식 -------*/
+img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.swiper-slide > a > img {
+  border-radius: 10px;
+}
+
+section {
+  margin-top: 60px;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  display: none;
+}
+
+.cart img {
+  height: unset;
+}
+
+/* 타이틀 서식 */
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+
+.title h2 {
+  font-size: 1.375rem;
+  font-weight: 700;
+}
+
+.title a {
+  font-size: 1rem;
+  color: #999;
+}
+
+/* 컨텐츠 텍스트 서식 */
+.con-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 140%;
+  margin-top: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: normal;
+  /* 2줄 말줄임 */
+}
+
+.con-sub {
+  font-size: 0.9375rem;
+  margin-top: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  white-space: normal;
+  /* 1줄 말줄임 */
+}
+
+/* -----------1. 메인배너----------- */
+#sec01 {
+  position: relative;
+  height: 400px;
+}
+
+#sec01 > div {
+  width: 100%;
+  height: 100%;
+}
+
+#sec01 > .swiper-wrapper {
+  height: unset !important;
+}
+
+#sec01 .swiper-slide > div {
+  position: absolute;
+  bottom: 0;
+  color: #ffffff;
+  padding: 40px 20px;
+  width: 100%;
+}
+
+#sec01 .swiper-slide > div > span {
+  display: inline-block;
+  background: #EF2F15;
+  padding: 6px 10px;
+  border-radius: 40px;
+}
+
+#sec01 .swiper-slide > div > p:first-of-type {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 140%;
+  margin-top: 10px;
+}
+
+#sec01 .swiper-slide > div > p:last-of-type {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 120%;
+  margin-top: 10px;
+}
+
+/* 페이지네이션 버튼 그룹 */
+#sec01 .slide-btn {
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
+  font-size: 1.25rem;
+  padding: 0 20px 0 0;
+}
+
+/* 375px 이하일때 버튼크기와 위치 */
+@media (max-width: 375px) {
+  #sec01 .slide-btn {
+    transform: scale(0.8);
+    transform-origin: right;
+    bottom: 10px;
+    z-index: 100;
+  }
+}
+#sec01 .swiper-button-play-pause {
+  display: block;
+  width: 40px;
+  height: inherit;
+  background-color: rgba(28, 29, 31, 0.4);
+  text-align: center;
+  color: #ffffff;
+  z-index: 10;
+  cursor: pointer;
+  margin-left: 5px;
+  font-size: 1.375rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+}
+
+#sec01 .swiper-button-play-pause:before {
+  line-height: 40px;
+}
+
+#sec01 .swiper-pagination-fraction {
+  position: initial;
+  width: 80px;
+  background-color: rgba(28, 29, 31, 0.4);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+}
+
+#sec01 .swiper-pagination-fraction span {
+  font-weight: 300;
+}
+
+/* ----------2. 카테고리------------ */
+#sec02 > div {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 20px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+#sec02 > div > div {
+  width: 80px;
+}
+
+#sec02 > div > div > a {
+  display: block;
+  height: 100%;
+}
+
+#sec02 > div > div > a > img {
+  width: 80px;
+  height: 80px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+#sec02 > div > div > a > p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* -------3. 실시간 인기 강의------ */
+#sec03 .mySwiper2 {
+  padding: 0 0 0 20px;
+}
+
+#sec03 .swiper-wrapper {
+  height: auto;
+}
+
+#sec03 .swiper-slide {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 300px;
+}
+
+/* 480px ~ 767px (큰 모바일) */
+@media (min-width: 480px) {
+  #sec03 .swiper-slide {
+    height: 350px;
+  }
+}
+#sec03 .con-text {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  padding: 30px 20px 20px 20px;
+  color: #ffffff;
+}
+
+#sec03 .con-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* 순위 플래그 */
+.flag {
+  position: absolute;
+  top: 0px;
+  left: 25px;
+}
+
+.flag span {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.flag path {
+  fill: #FFCC18;
+}
+
+/* -------4. 마감임박 수강 ------ */
+#sec04 .mySwiper3 {
+  padding: 0 0 0 20px;
+}
+
+#sec04 .swiper-wrapper {
+  height: auto;
+}
+
+#sec04 .mySwiper3 .swiper-slide > img {
+  height: 150px;
+}
+
+/* ---------5. 광고배너-------- */
+#sec05 .mySwiper4 {
+  height: 150px;
+}
+
+#sec05 .swiper-pagination-fraction {
+  width: 60px;
+  padding: 5px 0;
+  border-radius: 20px;
+  left: inherit;
+  right: 20px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 300;
+  background: rgba(28, 29, 31, 0.4);
+}
+
+/* --------6. 수강생 후기-------- */
+#sec06 .mySwiper5 {
+  padding: 10px 0 10px 20px;
+}
+
+#sec06 .swiper-wrapper {
+  height: auto;
+}
+
+#sec06 .swiper-slide {
+  padding: 20px;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+#sec06 .profile {
+  display: flex;
+  align-items: flex-start;
+  background: #ffffff;
+  align-items: center;
+}
+
+#sec06 .profile > img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+#sec06 .profile > div {
+  margin-left: 10px;
+}
+
+#sec06 .profile > div > p {
+  padding-top: 5px;
+}
+
+#sec06 .con-text {
+  margin-top: 16px;
+  background: #ffffff;
+}
+
+#sec06 .con-text p:first-of-type {
+  color: #EF2F15;
+  font-size: 1rem;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  white-space: normal;
+  /* 1줄 말줄임 */
+  line-height: 160%;
+}
+
+#sec06 .con-title {
+  font-size: 1.125rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  white-space: normal;
+  /* 1줄 말줄임 */
+  margin-top: 4px;
+}
+
+#sec06 .con-sub {
+  line-height: 140%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  white-space: normal;
+  /* 3줄 말줄임 */
+  margin-top: 10px;
+  min-height: 4.2em;
+}
+
+/* ------7, 8, 9. 인기수강 -----*/
+.mySwiper3 {
+  padding: 0 0 0 20px;
+}
+
+.mySwiper3 .swiper-wrapper {
+  height: auto;
+}
+
+.mySwiper3 .swiper-slide > a > img {
+  height: 150px;
+  border-radius: 10px;
+}
+
+/* --------10. 모바일앱 띠배너------- */
+#sec10 {
+  height: 65px;
+}
+
+/* --------11. 국비과정 베스트-------- */
+#sec11 .row {
+  margin-right: 0;
+  margin-left: 0;
+  gap: 15px;
+  padding: 0 20px;
+}
+
+#sec11 .row > * {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#sec11 .col {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  flex: 1 1 100%;
+}
+
+/* 1025px 이상일 때 3개의 열로 배치 */
+@media (min-width: 1025px) {
+  #sec11 .row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+#sec11 .col::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(39, 25, 17, 0.8);
+  mix-blend-mode: multiply;
+  z-index: 1;
+}
+
+#sec11 .col > div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+#sec11 .col > div > * {
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 140%;
+}
+
+#sec11 .col > div > p:first-of-type {
+  font-size: 1.125rem;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: normal;
+  /* 2줄 말줄임 */
+}
+
+#sec11 .col > div > p:last-of-type {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  white-space: normal;
+  /* 3줄 말줄임 */
+}
+
+#sec11 .col > div > span {
+  padding: 5px 0;
+  font-size: 1.125rem;
+  color: #FFCC18;
+}
+
+/* ----------12. 커뮤니티---------- */
+#sec12 {
+  padding-bottom: 100px;
+}
+
+#sec12 .tab {
+  padding: 0 20px;
+}
+
+#sec12 .tab > ul {
+  gap: 0;
+}
+
+#sec12 .tab button {
+  color: #666;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background: #ffffff;
+  height: 100%;
+}
+
+#sec12 .tab button.active {
+  color: #000000;
+  border-bottom: 2px solid #000000;
+}
+
+#sec12 .tab_con li a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  white-space: normal;
+  /* 1줄 말줄임 */
+  width: 90%;
+}
+
+/* 1025px 이상일 때 공통 스타일 설정 */
+@media (min-width: 1025px) {
+  /* 섹션 너비 및 중앙 정렬 */
+  #sec02, #sec03, #sec04, #sec06, #sec07, #sec08, #sec09, #sec11, #sec12 {
+    width: 1200px;
+    margin: 50px auto 0 auto; /* 여백 설정 */
+  }
+  /* Swiper 슬라이드 및 버튼 중앙 정렬 */
+  #sec01 .swiper-slide > div,
+  #sec01 .slide-btn {
+    width: 1200px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+  /* Swiper 버튼 스타일 */
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: block;
+    color: #000000;
+    text-align: center;
+    height: 40px;
+  }
+  .swiper-button-next {
+    right: -5px;
+  }
+  .swiper-button-prev {
+    left: -5px;
+  }
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 30px;
+    line-height: 40px;
+  }
+  /* 페이지네이션 버튼 뒤에 흰 배경 추가 */
+  .swiper-button-next::before,
+  .swiper-button-prev::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 500px;
+    background: #fff;
+    z-index: -1;
+  }
+  /* Swiper 패딩 설정 */
+  .mySwiper2,
+  .mySwiper3,
+  .mySwiper5 {
+    padding: 0 22px !important;
+  }
+  #sec06 .mySwiper5 {
+    padding: 10px 22px !important;
+  }
+  #sec06 .swiper-wrapper {
+    padding: 10px; /* 그림자 영역 설정 */
+  }
+  /* 메인 배너 높이 변경 */
+  #sec01 {
+    height: 500px;
+    min-width: 1200px;
+  }
+  /* 광고배너 너비변경 */
+  #sec05, #sec10 {
+    min-width: 1200px;
+  }
+  /* 푸터 최대 너비 설정 */
+  footer {
+    min-width: 1200px;
+  }
+  footer .container {
+    max-width: 1200px !important;
+  }
+  /* 바디 마진 설정 */
+  body {
+    margin-bottom: 0;
+  }
+}/*# sourceMappingURL=main.css.map */

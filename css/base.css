@@ -1,0 +1,34 @@
+@charset "utf-8";
+
+:root{
+  /* 폰트 사이즈 */
+  --fs-xsmall: 0.9375rem;       /* 15px */
+  --fs-small: 1rem;             /* 16px */
+  --fs-medium: 1.125rem;        /* 18px */
+  --fs-medium-large: 1.25rem;   /* 20px */
+  --fs-large: 1.375rem;         /* 22px */
+  --fs-xlarge: 1.5rem;          /* 24px */
+
+  /* 폰트 두께 */
+  --fw-thin: 300;
+  --fw-light: 400;
+  --fw-normal: 500;
+  --fw-semi-bold: 600;
+  --fw-bold: 700;
+
+  /* 색상 */
+  --red: #EF2F15;
+  --yellow: #FFCC18;
+  --green: #26A450;
+  --darkbrown: #281A12;
+  --gray: #D9D9D9;
+  --light-gray: #EFEFEF;
+  --white: #ffffff;
+  --black: #000000;
+
+  /* 패딩값 */
+  --p_20: 20px;
+  
+  /* 마진값 */
+  --m_50: 50px;
+}

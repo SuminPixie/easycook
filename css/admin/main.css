@@ -1,0 +1,420 @@
+@charset "UTF-8";
+
+.position_relative{
+  position:relative;
+}
+.bold_line{
+  border-top: 3px solid var(--darkbrown);
+  border-bottom: 1px solid var(--darkbrown);
+}
+.light_line{
+  border-top: 1px solid var(--darkbrown);
+}
+.line50{
+  line-height:50px;
+}
+.title_bold_line{
+  width: 100%; height: 3px; background-color: var(--admin);
+}
+
+
+.green{
+  background-color:var(--green) !important;
+}
+.yellow{
+  background-color:var(--yellow) !important; color:var(--darkbrown) !important;
+}
+.darkbrown{
+  background-color:var(--darkbrown) !important;
+}
+
+#file_view:hover{
+  color: var(--red);
+  cursor: pointer;
+}
+
+/*  서브서식 모음 */
+/* index.php */
+.board {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3개의 동일한 너비 칼럼 */
+  grid-template-rows: repeat(2, auto);  /* 행의 높이는 내용에 따라 자동 조정 */
+  grid-gap: 30px; /* 칼럼과 행 사이의 간격 */
+}
+
+.board_con{
+  width: 100%;
+  border: 1px solid var(--gray);
+  border-radius: 10px;
+}
+.board_con div:nth-child(2){
+  height: 200px;
+}
+
+.board_con div:nth-child(2) ul{
+  padding-top: 2px;
+}
+.board_con div:nth-child(2) ul li{
+  line-height: 45px;
+  padding: 0 10px;
+  font-size: var( --fs-small);
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.more_text{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.board_con > div:nth-child(2) ul > li > a > ul > li:nth-child(1){
+  width: 65%;
+}
+.board_con > div:nth-child(2) ul > li > a > ul > li:nth-child(2){
+  width: 35%;
+  text-align: right;
+  font-size: var(--fs-xsmall);
+}
+
+.board_con div:nth-child(2) ul li a ul{
+  display: flex;
+  justify-content: space-between;
+}
+
+.board_con div:nth-child(2) ul li a ul .board_sub{
+  display: flex;
+  flex-direction: column;
+  line-height: 30px;
+}
+.board_con div:nth-child(2) ul li a ul .board_sub span{
+  font-weight: var(--fw-thin);
+  font-size: var(--fs-xsmall);
+  line-height: 10px;
+}
+
+.board_title{
+  background-color:var(--yellow);
+  color: var(--admin);
+  border: 1px solid var(--yellow);
+  border-radius: 10px 10px 0 0;
+  padding: 10px;
+  display: flex;  justify-content: space-between;
+  height: 40px;
+}
+
+.board_title span{
+  display: block;
+  margin: 0; padding: 0;
+}
+
+/* 퀵메뉴 */
+.board_q_menu{
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(2, auto);
+  grid-gap: 20px;
+  font-size: 14px;
+  text-align: center;
+  width: 75%;
+  margin: 0 auto;
+  padding: 20px;
+}
+.board_q_menu span{
+  display: block;
+}
+
+
+/*------- class_create.php 강의 개설 -------- */
+.class_create{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.class_create article{
+  width: 100%;
+}
+.class_create article:nth-child(2) div{
+  margin: 0px 0;
+}
+.class_create article:nth-child(2) div p{
+  margin: 0px 0;
+}
+
+
+/* -------탭3,4 콘텐츠 ------- */
+#tab_con, 
+#tab_con2{
+  width: 100%;
+  overflow: hidden;
+}
+#tab_con > ul,
+#tab_con2 > ul{
+  display: flex;
+}
+
+#tab_con > ul > li,
+#tab_con2 > ul >li{
+  list-style: none;
+  text-align: center;
+  background-color: var(--gray);
+  margin: 0 2px;
+  border-radius: 5px;
+}
+#tab_con > ul > li{  width: 33.3%;}
+#tab_con2 > ul >li{  width: 24.3%;  }
+
+#tab_con > ul > li > a,
+#tab_con2 > ul > li > a{
+  text-decoration: none; color: #333; 
+  display: block; 
+  line-height: 50px;}
+
+.act{
+  background-color: var(--yellow);
+  border-radius: 5px;
+  font-weight: bold;  border-bottom: none !important;
+}
+
+
+/* ------student.php ------*/
+.student_box{
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* 스크롤바가 보이게 할 요소 설정 */
+.scrollable {
+  width: 100%;
+  overflow-x: auto; /* 스크롤바 자동 표시 */
+}
+
+
+.student thead tr th:nth-child(3),
+.student tbody tr td:nth-child(3),
+.student thead tr th:nth-child(6),
+.student tbody tr td:nth-child(6){
+  border-right: 1px solid black !important;
+}
+
+.student thead tr th,
+.student tbody tr td{
+  border-right: 1px solid white !important;
+}
+
+
+/* 강의소개 */
+.class_info{
+  display: flex;
+}
+
+.class_detail{
+  display: block; 
+  width: 100%; 
+  height: 200px;
+  border: 1px solid var(--gray);
+  border-radius: 10px;
+  font-size: var(--fs-small);
+  text-align: left;
+  padding: 11.5px;
+  margin: 0 0 0 10px;
+}
+
+.class_detail li{
+  line-height: 25px;
+}
+
+.class_detail_img{
+  margin: 10% auto;
+  width: 100%;
+  border: 1px solid var(--gray);
+  position: relative;
+}
+.thumbnail{
+  width: 200px; height:200px;
+  border-radius: 10px;
+  background-color: gainsboro;
+} 
+
+.btn_relative{
+  position: relative;
+}
+
+
+/* ----question_1.php 문의관리 리스트 공통서식----- */
+
+/* 답변상태 */
+
+.span_subtitle{
+  line-height: 20px;
+  font-size: var(--fs-xsmall);
+  overflow: hidden;
+  color: var(--darkbrown);
+}
+.span_title,
+.question_list tbody tr td:nth-child(3) span{
+  display: block;
+  width: 80px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: var(--fs-small);
+  margin: 0 auto;
+}
+.span_title,.question_r1{
+  background-color: var(--red);
+  color: var(--white);
+}
+.question_r2{
+  background-color: var(--darkbrown);
+  color: var(--white);
+}
+
+/* 제목 서식 */
+.question_list tbody tr td:nth-child(2){
+  position: relative;
+}
+.question_list tbody tr td:nth-child(2) a{
+  position: absolute; top: 0px; left: 7px;
+  height: 100%;
+  width: 100%;
+}
+
+.question_list tbody tr td:nth-child(2) span{
+  line-height: 20px;
+  font-size: var(--fs-xsmall);
+  position: absolute; top: 30px; left: 0px;
+}
+
+/* ----------------register.php-------- */
+/* 서브제목 서식 */
+.admin_s_title{
+  font-weight: var(--fw-bold);
+  color: var(--admin);
+}
+
+/* 프로필 서식 */
+#img{
+  display:none;
+}
+.input-group-text {
+  background-color: #fff !important;
+  font-size: 1.5rem;
+  color: #ccc;
+  border-radius: 10px !important;
+  width: 300px; height: 300px;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+#preview {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit:cover;
+}
+
+/* review_list.php */
+/* .review-item span:nth-child(1){}
+.review-item span:nth-child(2){
+  position: absolute;
+  left: 232px;
+}
+.review-item span:nth-child(3){
+  position: absolute;
+  left: 140px;
+} */
+
+.review-item{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 300px;
+}
+#review_table tr td{
+    line-height: 25px;
+}
+
+/* room reserve */
+.admin_reserve{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.admin_reserve_con{
+  width: 47%;
+}
+.admin_reserve_con > p{
+  font-size: var(--fs-medium-large);
+  font-weight: var(--fw-normal);
+  text-align: center;
+  margin: 30px 0 20px 0;
+}
+.admin_reserve_con div:nth-child(2){
+  width: 100%;
+  display:flex;
+  justify-content:space-between;
+}
+.admin_reserve_con div:nth-child(2) p {
+  font-size: var(--fs-medium);
+}
+
+.admin_reserve_con .reserve_time{
+  margin: 10px auto;
+  width: 100%;
+  border: 1px solid var(--darkbrown);
+  border-radius: 5px;
+}
+input[type="checkbox"]{
+  display: none;
+}
+label{
+  display: block;
+}
+.admin_reserve_con .reserve_time label ul{
+  width: 90%;
+  margin: 0px auto;
+  display: flex;
+  justify-content: space-between;
+  line-height: 40px;
+}
+.admin_reserve_con .reserve_time div{
+  background-color: var(--gray);
+  border-radius: 0 0 5px 5px;
+  padding : 10px;
+  display: none; 
+}
+.admin_reserve_con .reserve_time div ul{
+  display: flex;
+  flex-wrap: wrap;
+}
+.admin_reserve_con .reserve_time div ul li{
+  display: block;
+  width: 50%;
+  text-align: center;
+  padding: 5px 0;
+}
+
+#time8:checked ~ .reserve_p,
+#time9:checked ~ .reserve_p,
+#time10:checked ~ .reserve_p,
+#time11:checked ~ .reserve_p,
+#time12:checked ~ .reserve_p,
+#time13:checked ~ .reserve_p,
+#time14:checked ~ .reserve_p,
+#time15:checked ~ .reserve_p,
+#time16:checked ~ .reserve_p,
+#time17:checked ~ .reserve_p,
+#time18:checked ~ .reserve_p,
+#time19:checked ~ .reserve_p,
+#time20:checked ~ .reserve_p,
+#time21:checked ~ .reserve_p,
+#time22:checked ~ .reserve_p,
+#time23:checked ~ .reserve_p,
+#time24:checked ~ .reserve_p,
+#time25:checked ~ .reserve_p,
+#time26:checked ~ .reserve_p,
+#time27:checked ~ .reserve_p{  display: block;}

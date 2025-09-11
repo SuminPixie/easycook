@@ -1,0 +1,349 @@
+@charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+li {
+  list-style: none;
+}
+
+body {
+  font-family: "Pretendard", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  text-rendering: geometricPrecision;
+  margin-bottom: 60px; /* 바텀바 높이만큼 띄우기 */
+}
+
+@media (min-width: 1025px) {
+  body {
+    margin-bottom: 0px;
+  }
+}
+main {
+  margin-top: 70px; /* 헤더 높이만큼 띄우기 */
+}
+
+html {
+  font-size: 16px;
+}
+
+/* 화면 크기가 375px 미만일 때 기본 폰트 크기를 14px로 조정 */
+.cart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 10%;
+  min-width: 30px;
+  max-width: 50px;
+}
+.cart img {
+  width: 100%;
+}
+
+.star {
+  white-space: nowrap;
+}
+.star i {
+  color: #EF2F15;
+  opacity: 0.2;
+}
+.star i.active {
+  opacity: 1;
+}
+
+.tab {
+  width: 100%;
+}
+.tab > ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.tab > ul li {
+  width: 100%;
+}
+.tab > ul li button {
+  width: 100%;
+  padding: 10px 20px;
+  border: 1px solid #D9D9D9;
+  background: #D9D9D9;
+  cursor: pointer;
+}
+.tab > ul li button.active {
+  background: #ffffff;
+  border-bottom: none;
+}
+.tab .tab_con {
+  background: #ffffff;
+}
+.tab .tab_con > div {
+  display: none;
+}
+.tab .tab_con > div.active {
+  display: block;
+}
+
+.list {
+  border-radius: 0;
+  width: 100%;
+}
+.list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+.list li span:first-child {
+  width: 60px;
+}
+.list li span:last-child {
+  opacity: 0;
+  background: #EF2F15;
+  color: #ffffff;
+  font-size: 1rem;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 5px;
+  text-align: center;
+  margin-left: auto; /* N표시 오른쪽 정렬 */
+}
+.list li span:last-child.active {
+  opacity: 1;
+}
+
+.button, .btn-box-l .btn-l, .btn-box-s .btn-s {
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border: none;
+  border-radius: 5px;
+}
+.button:hover, .btn-box-l .btn-l:hover, .btn-box-s .btn-s:hover {
+  filter: brightness(90%);
+}
+.button:nth-child(1), .btn-box-l .btn-l:nth-child(1), .btn-box-s .btn-s:nth-child(1) {
+  background: #EF2F15;
+  color: #ffffff;
+}
+.button:nth-child(2), .btn-box-l .btn-l:nth-child(2), .btn-box-s .btn-s:nth-child(2) {
+  background: #D9D9D9;
+  color: #000000;
+}
+
+.btn-box-s {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+.btn-box-s .btn-s {
+  width: 50%;
+}
+.btn-box-s .btn-s.line {
+  border: 1px solid #EF2F15;
+  background: #ffffff;
+  color: #EF2F15;
+}
+.btn-box-s .btn-s.fill {
+  background: #EF2F15;
+  color: #ffffff;
+}
+.btn-box-s .btn-s.gray {
+  background: #D9D9D9;
+  color: #000000;
+}
+
+.btn-box-l {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.btn-box-l .btn-l.line {
+  border: 1px solid #EF2F15;
+  background: #ffffff;
+  color: #EF2F15;
+}
+.btn-box-l .btn-l.fill {
+  background: #EF2F15;
+  color: #ffffff;
+}
+.btn-box-l .btn-l.gray {
+  background: #D9D9D9;
+  color: #000000;
+}
+
+.card-list {
+  width: 100%;
+}
+.card-list li {
+  border: 1px solid #D9D9D9;
+  border-radius: 5px;
+  margin-bottom: 16px;
+  padding: 10px;
+}
+.card-list li > div:first-of-type {
+  display: flex;
+  justify-content: space-between;
+}
+.card-list li > div:first-of-type > a {
+  display: block;
+  width: 50%;
+  max-width: 400px;
+  max-height: 150px;
+  min-height: 100px;
+}
+.card-list li > div:first-of-type img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 5px;
+}
+.card-list li > div:first-of-type > div {
+  width: 70%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.card-list li > div:first-of-type > div h2 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.card-list li > div:first-of-type > div > p {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.card-list li > div:first-of-type > div > p span {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #EF2F15;
+  white-space: nowrap;
+}
+.card-list li > div:first-of-type > div > div {
+  margin-top: auto; /* 바닥정렬 */
+  display: flex;
+  gap: 10px;
+}
+.card-list li > div:first-of-type > div > div > span {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.card-list li > div:first-of-type .cart {
+  margin-top: auto;
+  top: unset;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+}
+.card-list li > div:first-of-type .cart img {
+  width: 100%;
+}
+
+.checkmark-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+}
+.checkmark-container svg {
+  width: 100px;
+  height: 100px;
+}
+.checkmark-container svg .circle {
+  fill: none;
+  stroke: #EF2F15;
+  stroke-width: 7;
+}
+.checkmark-container svg .checkmark {
+  width: 100px;
+  height: 100px;
+  stroke-width: 7;
+  stroke: #EF2F15;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: drawCheck 1s ease-out forwards;
+  transform: scale(0.9);
+  transform-origin: center;
+}
+
+@keyframes drawCheck {
+  0% {
+    stroke-dasharray: 100px;
+    stroke-dashoffset: 100px;
+  }
+  100% {
+    stroke-dasharray: 100px;
+    stroke-dashoffset: 0;
+  }
+}
+.card-list-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px 15px;
+  margin: 0;
+}
+.card-list-box > div {
+  position: relative;
+  padding: 0;
+  box-sizing: border-box;
+}
+.card-list-box > div a > img {
+  width: 100%;
+  border-radius: 10px;
+  height: 160px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.card-list-box > div .cart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  cursor: pointer;
+}
+.card-list-box > div a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.card-list-box > div a .con-text .con-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 140%;
+  margin-top: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: normal;
+}
+.card-list-box > div a .con-text .con-sub {
+  font-size: 1rem;
+  margin-top: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  white-space: normal;
+}
+
+.bread_c {
+  font-size: 1rem;
+  font-weight: 400;
+  padding-top: 13px;
+}/*# sourceMappingURL=common.css.map */

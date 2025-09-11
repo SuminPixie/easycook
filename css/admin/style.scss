@@ -1,0 +1,113 @@
+@charset "utf-8";
+
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+// 폰트 사이즈
+$fs-xsmall: 0.75rem; // 12px
+$fs-small: 0.875rem; // 14px
+$fs-medium: 1rem; // 16px
+$fs-medium-large: 1.125rem; // 18px
+$fs-large: 1.25rem; // 20px
+$fs-xlarge: 1.5rem; // 24px
+
+// 폰트 두께
+$fw-thin: 100;
+$fw-light: 300;
+$fw-normal: 500;
+$fw-bold: 700;
+
+// 색상
+$red: #EF2F15;
+$yellow: #FFCC18;
+$green: #26A450;
+$darkbrown: #281A12;
+$gray: #D9D9D9;
+$light-gray: #EFEFEF;
+$white: #ffffff;
+$black: #000000;
+
+// 패딩값
+$p_20: 20px;
+
+//마진값
+$m_50: 50px;
+
+// 기본 루트 서식 (추가된 부분)
+$admin: #271F1F;
+$border_m:10px;
+$border_s:5px;
+
+
+//말줄임 (1줄)
+@mixin text-over($line: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  white-space: normal;
+}
+
+
+/* 버튼서식 */
+@mixin btn{
+  display: block;
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: $border_s;
+  border: none; 
+}
+
+@mixin btn_red{
+  //반복해서 사용할 스타일 서식을 작성한다.
+  background-color: $red;
+  color: $white;
+  font-weight: 400;
+}
+
+@mixin btn_yellow{
+  //반복해서 사용할 스타일 서식을 작성한다.
+  background-color:$yellow;
+  color: $admin;
+}
+
+.text-over{
+  @include text-over;
+}
+
+.admin_btn{ @include btn;}
+.admin_btn_red,.admin_btn_del{@include btn_red;}
+.admin_btn_yellow{ @include btn_yellow;}
+.admin_btn_gray{ 
+  @include btn;
+  background-color: $gray;
+  color: $black;}
+
+@mixin position_r_b{
+  position:absolute; right: 0px; bottom:-10px;
+  margin-bottom: 10px;
+}
+@mixin position_l_b{
+  position:absolute; left: 0px; bottom:-10px;
+  margin-bottom: 10px;
+}
+.position_r_b{
+  @include position_r_b;
+}
+.position_l_b{
+  @include position_l_b;
+}
+.position_c_b{
+  position:absolute; 
+  left:105px; bottom:-10px;
+  margin-bottom: 10px;
+}
+
+

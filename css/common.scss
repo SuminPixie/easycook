@@ -1,0 +1,445 @@
+@charset "utf-8";
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+// 폰트 사이즈
+$fs-xsmall: 0.9375rem;      // 15px
+$fs-small: 1rem;            // 16px
+$fs-medium: 1.125rem;       // 18px
+$fs-medium-large: 1.25rem;  // 20px
+$fs-large: 1.375rem;        // 22px
+$fs-xlarge: 1.5rem;         // 24px
+
+
+// 폰트 두께
+$fw-thin: 300;
+$fw-light: 400;
+$fw-normal: 500;
+$fw-semi-bold: 600;
+$fw-bold: 700;
+
+// 색상
+$red: #EF2F15;
+$yellow: #FFCC18;
+$green: #26A450;
+$darkbrown: #281A12;
+$gray: #D9D9D9;
+$light-gray: #EFEFEF;
+$white: #ffffff;
+$black: #000000;
+
+// 패딩값
+$p_20: 20px;
+
+//마진값
+$m_50: 50px;
+
+
+a{
+  text-decoration: none;
+  color: $black;
+}
+li{
+  list-style: none;
+}
+
+
+body {
+  font-family: 'Pretendard', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  text-rendering: geometricPrecision;
+  margin-bottom: 60px; /* 바텀바 높이만큼 띄우기 */
+}
+@media (min-width: 1025px) {
+  body{
+    margin-bottom: 0px;
+  }
+}
+
+main{
+  margin-top: 70px; /* 헤더 높이만큼 띄우기 */
+}
+
+// 기본 폰트 크기를 16px로 설정
+html {
+  font-size: 16px;
+}
+
+/* 화면 크기가 375px 미만일 때 기본 폰트 크기를 14px로 조정 */
+// @media (max-width: 374px) {
+//   html {
+//     font-size: 14px;
+//   }
+// }
+
+
+
+//----------------mixin 서식-----------------
+
+//말줄임 (1줄)
+@mixin text-over($line: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  white-space: normal;
+}
+
+
+//------------------공통 컴포넌트----------------
+
+// 찜 아이콘
+.cart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 10%;
+  min-width: 30px;
+  max-width: 50px;
+
+  img{
+    width: 100%;
+  }
+}
+
+// 별점
+.star {
+  white-space: nowrap;
+  i {
+    color: $red;
+    opacity: 0.2;
+    
+    &.active {
+      opacity: 1;
+    }
+  }
+}
+
+//탭 컨텐츠
+.tab {
+  width: 100%;
+  > ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    gap:10px;
+    li{
+      width: 100%;
+
+      button{
+        width: 100%;
+        padding: 10px 20px;
+        border: 1px solid $gray;
+        background: $gray;
+        cursor: pointer;
+
+        &.active{
+          background: $white;
+          border-bottom: none;
+        }
+      }
+    }
+  }
+  .tab_con{
+    background: $white;
+    > div{
+      display: none;
+
+      &.active{
+        display: block;
+      }
+    }
+  }
+}
+
+
+//리스트 목록 스타일
+.list{
+  border-radius: 0;
+  width: 100%;
+  li{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+
+    span:first-child{
+      width: 60px;
+    }
+    span:last-child{
+      opacity: 0;
+      background: $red;
+      color: $white;
+      font-size: $fs-small;
+      width: 20px; height: 20px;
+      line-height: 20px;
+      border-radius: 5px;
+      text-align: center;
+      margin-left: auto; /* N표시 오른쪽 정렬 */
+
+      &.active{
+        opacity: 1;
+      }
+    }
+  }
+}
+
+
+//버튼 스타일
+$button-height: 40px;
+$button-gap: 10px;
+
+// 공통 버튼 스타일
+.button {
+  width: 100%;
+  height: $button-height;
+  text-align: center;
+  line-height: $button-height;
+  border: none;
+  border-radius: 5px;
+
+  &:hover {
+    filter: brightness(90%);
+  }
+  &:nth-child(1) {
+    background: $red;
+    color: $white;
+  }
+  &:nth-child(2) {
+    background: $gray;
+    color: $black;
+  }
+}
+
+// 버튼 - 크기 50%
+.btn-box-s {
+  width: 100%;
+  display: flex;
+  gap: $button-gap;
+
+  .btn-s {
+    @extend .button;
+    width: 50%;
+
+    &.line {
+      border: 1px solid $red;
+      background: $white;
+      color: $red; // 추가로 텍스트 색상 변경
+    }
+    &.fill {
+      background: $red;
+      color: $white; // 추가로 텍스트 색상 변경
+    }
+    &.gray {
+      background: $gray;
+      color: $black; // 추가로 텍스트 색상 변경
+    }
+  }
+}
+
+// 버튼 - 크기 100%
+.btn-box-l {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $button-gap;
+
+  .btn-l {
+    @extend .button;
+    
+    &.line {
+      border: 1px solid $red;
+      background: $white;
+      color: $red; // 추가로 텍스트 색상 변경
+    }
+    &.fill {
+      background: $red;
+      color: $white; // 추가로 텍스트 색상 변경
+    }
+    &.gray {
+      background: $gray;
+      color: $black; // 추가로 텍스트 색상 변경
+    }
+  }
+}
+
+// 상품목록 카드 스타일
+.card-list {
+  width: 100%;
+  li{
+    border: 1px solid $gray;
+    border-radius: 5px;
+    margin-bottom: 16px;
+    padding: 10px;
+  }
+  li > div:first-of-type {
+    display: flex;
+    justify-content: space-between;
+    > a{
+      display: block;
+      width: 50%;
+      // aspect-ratio: 1 / 1; /* 1:1 비율 설정 */
+      max-width: 400px;
+      max-height: 150px;
+      min-height: 100px;
+    }
+    img {
+      width: 100%;height: 100%;
+      object-fit: cover; 
+      border-radius: 5px;
+    }
+
+    > div {
+      width: 70%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+
+      h2 {
+        margin: 0;
+        font-size: $fs-medium;
+        font-weight: $fw-bold;
+      }
+
+      > p {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+        span {
+          font-size: $fs-small;
+          font-weight: 400;
+          color: $red;
+          white-space: nowrap;
+        }
+      }
+      > div{
+        margin-top: auto; /* 바닥정렬 */
+        display: flex;
+        gap: 10px;
+
+        > span {
+          font-size: $fs-small;
+          font-weight: 400;
+        }
+
+      }
+    }
+    .cart{
+      margin-top: auto;
+      top: unset;
+      right: 0;
+      bottom: 0;
+      width: 30px;
+      img{
+        width: 100%;
+      }
+    }
+  }
+}
+
+//체크되는 애니메이션 아이콘
+.checkmark-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+
+  svg {
+    width: 100px;
+    height: 100px;
+
+    .circle {
+      fill: none;
+      stroke: $red;
+      stroke-width: 7;
+    }
+
+    .checkmark {
+      width: 100px;
+      height: 100px;
+      stroke-width: 7;
+      stroke: $red;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      animation: drawCheck 1s ease-out forwards;
+      transform: scale(0.9);
+      transform-origin: center;
+    }
+  }
+}
+@keyframes drawCheck {
+  0% {
+    stroke-dasharray: 100px;
+    stroke-dashoffset: 100px;
+  }
+  100% {
+    stroke-dasharray: 100px;
+    stroke-dashoffset: 0;
+  }
+}
+
+
+//카드리스트 박스 스타일
+.card-list-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); // 자동으로 열을 설정
+  gap: 30px 15px;
+  margin: 0;
+
+  > div {
+    position: relative;
+    padding: 0;
+    box-sizing: border-box;
+
+    // 이미지 스타일
+    a > img {
+      width: 100%;
+      border-radius: 10px;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .cart {
+      position: absolute; // 필요에 따라 위치 조정
+      top: 10px;
+      right: 10px;
+      z-index: 10; // 필요한 경우
+      cursor: pointer;
+    }
+
+    a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+
+      .con-text {
+        .con-title {
+          font-size: $fs-medium;
+          font-weight: $fw-bold;
+          line-height: 140%;
+          margin-top: 8px;
+          @include text-over(2);
+        }
+
+        .con-sub {
+          font-size: $fs-small;
+          margin-top: 8px;
+          @include text-over(1);
+        }
+      }
+    }
+  }
+}
+
+.bread_c{
+  font-size: $fs-small;
+  font-weight: 400;
+  padding-top: 13px;
+}
