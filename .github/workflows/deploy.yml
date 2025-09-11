@@ -1,0 +1,32 @@
+name: Deploy to Cafe24 via FTP
+
+on:
+  push:
+    branches:
+      - main  # main 브랜치에 push될 때 실행
+
+jobs:
+  ftp-deploy:
+    name: Upload via FTP
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: FTP Deploy
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: pixiesite.mycafe24.com        # 카페24 FTP 주소
+        username: ${{ secrets.FTP_USER }}     # GitHub Secrets
+        password: ${{ secrets.FTP_PASS }}
+        local-dir: ./                         # 레포지토리 안에 보여줄 index파일 위치
+        server-dir: /www/easycook/           # 카페24의 업로드 폴더 위치
+        dangerous-clean-slate: false           # server-dir에 있는 파일들을 비우고 새로 업로드 함
+        exclude: |
+          **/.git/**
+          **/.github/**
+          **/.DS_Store
+          **/node_modules/**
+          **/.vscode/**
+          **/.env
