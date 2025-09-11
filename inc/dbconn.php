@@ -9,7 +9,7 @@ $mysql_host='localhost'; //호스트명
 //$mysql_user='root'; //로컬 사용자명
 //$mysql_password=''; //로컬 패스워드
 $mysql_user='pixiesite'; //cafe24사용자명
-$mysql_password='p03010301'; //cafe24패스워드
+$mysql_password='p03010301'; //cafe24패스워드야
 $mysql_db='pixiesite'; //데이터베이스명
 // $mysql_db='easycook'; //데이터베이스명
 
