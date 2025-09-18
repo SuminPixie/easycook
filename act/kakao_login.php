@@ -65,7 +65,7 @@ if ($row = $res->fetch_assoc()) {
   $_SESSION['profile']      = $row['profile'];
   $_SESSION['teacher_code'] = $row['teacher_code'];
 
-  $redirect = !empty($row['teacher_code']) ? '../admin/index.php' : '../index.php';
+  $redirect = !empty($row['teacher_code']) ? './admin/index.php' : './index.php';
   echo json_encode(['success'=>true, 'redirect'=>$redirect]);
   exit;
 }
@@ -129,7 +129,7 @@ if ($stmtIns->execute()) {
   // (선택) 강사코드 1회성이라면 다음 줄 주석 해제해서 제거
   // unset($_SESSION['teacher_code']);
 
-  $redirect = ($teacher_code !== '') ? '../admin/index.php' : '../index.php';
+  $redirect = ($teacher_code !== '') ? './admin/index.php' : './index.php';
   echo json_encode(['success'=>true, 'redirect'=>$redirect]);
 } else {
   echo json_encode(['success'=>false, 'message'=>'회원가입 실패: '.$conn->error]);
