@@ -127,7 +127,7 @@
 
         // 성공
         sessionStorage.removeItem('kakaoPayload');
-        location.href = data.redirect || '/';
+        location.href = data.redirect || './index.php';
       } catch (err) {
         console.error('Fetch 네트워크 오류:', err);
         alert('네트워크 오류가 발생했습니다.');
