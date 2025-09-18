@@ -288,7 +288,7 @@ if (!empty($_SESSION['id'])) {
             // ① 카카오 프로필 임시 보관
             sessionStorage.setItem('kakaoPayload', JSON.stringify(payload));
             // ② 회원유형 선택 페이지로 이동
-            location.href = '/register_pre.php';
+            location.href = './register_pre.php';
           })
           .catch(console.error);
       },
