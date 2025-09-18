@@ -62,30 +62,74 @@
 
   </main>
   <script>
-    $(document).ready(function() {
-      $('#teacher_check_form').submit(function(event) {
-        event.preventDefault(); // 기본 제출 동작을 막음
+$(document).ready(function() {
+  $('#teacher_check_form').submit(function(event) {
+    event.preventDefault(); // 기본 제출 동작 막기
 
-        // 폼 데이터 직렬화
-        let formData = $(this).serialize();
+    // 폼 데이터 직렬화
+    let formData = $(this).serialize();
 
-        // 서버로 데이터 전송
-        $.post('./act/register_teacher_check.php', formData)
-          .done(function(response) {
-            if (response.trim() === '사번이 일치합니다.') {
-              //회원가입 폼 이동
-              window.location.href = './register.php';
+    // 서버로 데이터 전송(사번 검증)
+    $.post('./act/register_teacher_check.php', formData)
+      .done(function(response) {
+        if ($.trim(response) === '사번이 일치합니다.') {
+          // ✔ 사번 유효 — kakaoPayload 여부에 따라 분기
+          var raw = sessionStorage.getItem('kakaoPayload');
+
+          // 입력한 사번값(teacher_code) 추출
+          var staff_no = $('#teacher_code').val().trim();
+
+          // kakaoPayload 없으면 기존대로 일반 회원가입 페이지로
+          if (!raw) {
+            window.location.href = './register.php';
+            return;
+          }
+
+          // kakaoPayload 있으면: 간편가입+로그인(강사)
+          var kakaoPayload;
+          try {
+            kakaoPayload = JSON.parse(raw);
+          } catch (e) {
+            // 파싱 실패 시 안전하게 일반 회원가입으로
+            sessionStorage.removeItem('kakaoPayload');
+            window.location.href = './register.php';
+            return;
+          }
+
+          // 카카오 통합 로그인/가입 호출 (role=teacher + staff_no 포함)
+          $.ajax({
+            url: '/act/kakao_login.php',
+            method: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify($.extend({}, kakaoPayload, {
+              role: 'teacher',
+              staff_no: staff_no
+            })),
+            xhrFields: { withCredentials: true }
+          })
+          .done(function(data) {
+            if (data && data.success) {
+              sessionStorage.removeItem('kakaoPayload');
+              window.location.href = data.redirect || '/';
             } else {
-              // 에러 메시지 표시
-              $('#teacher_code').addClass('is-invalid');
+              alert((data && data.message) || '처리 실패');
             }
           })
           .fail(function() {
-            // 실패 시 에러 처리
-            console.log('요청 실패');
+            alert('네트워크 오류가 발생했습니다.');
           });
+
+        } else {
+          // ✖ 사번 불일치 — 에러 표시 그대로 유지
+          $('#teacher_code').addClass('is-invalid');
+        }
+      })
+      .fail(function() {
+        console.log('요청 실패');
       });
-    });
+  });
+});
   </script>
 
 </body>

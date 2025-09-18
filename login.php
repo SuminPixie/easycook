@@ -266,49 +266,37 @@ if (!empty($_SESSION['id'])) {
 
 
   <!-- 카카오 로그인 -->
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-  <script>
-    Kakao.init('4ee70829e487a3d51af14c0335fdbe22');
-    // sdk초기화여부판단 
-    console.log(Kakao.isInitialized());
-    //카카오로그인 
-    function kakaoLogin() {
-      //Kakao.Auth.authorize()
-      Kakao.Auth.login({
-        success: function (response) {
-          Kakao.API.request({ 
-          url: '/v2/user/me', success: function (response) {
-              console.log(response)
-              }, fail: function (error) { 
-              console.log(error)
-              }, 
-            })
-            }, fail: function (error) { 
-            console.log(error) 
-          }, 
-        }) 
-      } 
-    //카카오로그아웃 
-    function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) { 
-      Kakao.API.request({
-      url: '/v1/user/unlink',
-    })
-    .then(function(response) {
-      console.log(response);
-    })
-    .catch(function(error) {
-      console.log(error);
+<!-- Kakao SDK -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+  Kakao.init('4ee70829e487a3d51af14c0335fdbe22');
+
+  function kakaoLogin() {
+    Kakao.Auth.login({
+      scope: 'profile_nickname, profile_image, account_email',
+      success: function (auth) {
+        Kakao.API.request({ url: '/v2/user/me' })
+          .then(function(res){
+            const payload = {
+              provider: 'kakao',
+              id: String(res.id || ''),
+              email: res.kakao_account?.email || '',
+              name: res.kakao_account?.profile?.nickname || '',
+              avatar: res.kakao_account?.profile?.profile_image_url || '',
+              access_token: auth.access_token
+            };
+            // ① 카카오 프로필 임시 보관
+            sessionStorage.setItem('kakaoPayload', JSON.stringify(payload));
+            // ② 회원유형 선택 페이지로 이동
+            location.href = '/register_pre.php';
+          })
+          .catch(console.error);
+      },
+      fail: console.error
     });
-    // Kakao.API.request({ 
-    // url: '/v1/user/unlink', success: function (response) { 
-    // console.log(response) 
-    // }, fail: function (error) { 
-    //   console.log(error) }, 
-    //});
-      Kakao.Auth.setAccessToken(undefined) 
-    }}
-  </script>
+  }
+</script>
+
 
 
 </body>

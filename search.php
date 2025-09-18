@@ -1,5 +1,5 @@
 <?php
-  include('./php/include/dbconn.php');
+  include('./inc/dbconn.php');
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 검색창</title>
     <!-- 공통 헤드정보 삽입 -->
-    <?php include('./php/include/head.php'); ?>
+    <?php include('./inc/head.php'); ?>
 
     <!-- 서식 연결 -->
     <link rel="stylesheet" type="text/css" href="./css/search.css">
@@ -21,7 +21,7 @@
 </head>
 <body>
   <!-- 공통헤더삽입 -->
-  <?php include('./php/include/header.php');?>
+  <?php include('./inc/header.php');?>
 
   <main class="search_main">
     <!--검색 창-->
@@ -35,11 +35,11 @@
         </form>
       </article>
     </section>
-    <!--최근검색어-->
+    <!--추천 검색어-->
     <section class="new_search"> 
-      <h2>최근 검색어</h2>
+      <h2>추천 검색어</h2>
       <article>
-        <h2 class="hide">최근 검색어</h2>
+        <h2 class="hide">추천 검색어</h2>
         <div class="swiper mySwiper6">
           <div class="swiper-wrapper">
             <div class="swiper-slide">#<a href="search_output.php?search_key2=자격증" title="자격증(으)로 검색하기">자격증</a></div>
@@ -98,7 +98,7 @@
   </main>
 
   <!-- 공통바텀바삽입 -->
-  <?php include('./php/include/bottom.php');?>
+  <?php include('./inc/bottom.php');?>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 

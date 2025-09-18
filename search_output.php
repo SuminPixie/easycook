@@ -1,6 +1,6 @@
 <?php
   session_start();
-  include('./php/include/dbconn.php');
+  include('./inc/dbconn.php');
 
   if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];
@@ -11,7 +11,7 @@
   // 사용자가 카트에 담은 상품 목록 가져오기
   $cart_class_no = [];
   if ($id !== null) {
-    $cart_sql = "SELECT class_no FROM cart WHERE id = '$id'";
+    $cart_sql = "SELECT class_no FROM easycook_cart WHERE id = '$id'";
     $cart_result = mysqli_query($conn, $cart_sql);
     while ($cart_row = mysqli_fetch_assoc($cart_result)) {
       $cart_class_no[] = $cart_row['class_no'];
@@ -26,7 +26,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>강의 검색 | 이지쿡</title>
   <!-- 공통 헤드정보 삽입 -->
-  <?php include('./php/include/head.php'); ?>
+  <?php include('./inc/head.php'); ?>
   <style>
     .search_output{
       padding: 0 20px;
@@ -59,7 +59,7 @@
 </head>
 <body>
   <!-- 공통헤더삽입 -->
-  <?php include('./php/include/header_sub.php');?>
+  <?php include('./inc/header_sub.php');?>
 
   <!-- 메인서식 -->
   <main>    
@@ -89,7 +89,7 @@
 
             if(isset($search_key)){
               // echo "search_key".$search_key;
-              $sql = "select * from academy_list where
+              $sql = "select * from easycook_academy_list where
               name like '%$search_key%' or
               category1 like '%$search_key%' or
               category2 like '%$search_key%' or
@@ -101,7 +101,7 @@
               $result = mysqli_fetch_array($query);
             }else{
               // echo "search_key2".$search_key2;
-              $sql = "select * from academy_list where
+              $sql = "select * from easycook_academy_list where
               name like '%$search_key2%' or
               category1 like '%$search_key2%' or
               category2 like '%$search_key2%' or
@@ -136,9 +136,9 @@
 
 
   <!-- 공통푸터삽입 -->
-  <?php include('./php/include/footer.php');?>
+  <?php include('./inc/footer.php');?>
   <!-- 공통바텀바삽입 -->
-  <?php include('./php/include/bottom.php');?>
+  <?php include('./inc/bottom.php');?>
   <!-- 스와이퍼 js -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.5/swiper-bundle.min.js"></script>  
   <!-- 공통스크립트 연결 -->
