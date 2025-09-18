@@ -125,7 +125,9 @@
           return;
         }
 
+        
         // 성공
+        if (data.message) alert(data.message); 
         sessionStorage.removeItem('kakaoPayload');
         location.href = data.redirect || './index.php';
       } catch (err) {
