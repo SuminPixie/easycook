@@ -79,58 +79,63 @@
 
   </main>
 
-  <script>
-
-  // "일반 회원" 앵커 (href로 식별)
+<script>
   var userLink = document.querySelector('a[href="./register.php"]');
-  // "강사 회원" 앵커 (그대로 이동: register_teacher.php에서 사번 입력)
-  var teacherLink = document.querySelector('a[href="./register_teacher.php"]');
 
-  // 1) 일반회원
   if (userLink) {
-    userLink.addEventListener('click', function (e) {
+    userLink.addEventListener('click', async function (e) {
       var raw = sessionStorage.getItem('kakaoPayload');
+      if (!raw) return; // kakaoPayload 없으면 원래 페이지 이동
 
-      // kakaoPayload 없으면 기본 href로 이동(일반 회원가입)
-      if (!raw) return; // preventDefault 안 함
+      e.preventDefault(); // kakaoPayload 있으면 가로채서 소셜 가입/로그인
 
-      // kakaoPayload 있으면 가로채서 가입+로그인
-      e.preventDefault();
-
-      var kakaoPayload;
+      let kakaoPayload;
       try {
         kakaoPayload = JSON.parse(raw);
       } catch (err) {
-        // 파싱 실패 시 안전하게 일반 회원가입으로
         sessionStorage.removeItem('kakaoPayload');
         location.href = './register.php';
         return;
       }
 
-      var body = Object.assign({}, kakaoPayload, { role: 'user' });
+      const body = Object.assign({}, kakaoPayload, { role: 'user' });
 
-      fetch('/act/kakao_login.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify(body)
-      })
-      .then(function(r){ return r.json(); })
-      .then(function(data){
-        if (data.success) {
-          sessionStorage.removeItem('kakaoPayload');
-          location.href = data.redirect || '/';
-        } else {
-          alert(data.message || '처리 실패');
+      try {
+        const resp = await fetch('/act/kakao_login.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include'
+        , body: JSON.stringify(body)
+        });
+
+        // 네트워크 자체 실패만 catch로 가고, HTTP 4xx/5xx는 여기서 처리
+        const text = await resp.text();
+        let data = null;
+        try {
+          data = JSON.parse(text);
+        } catch (e) {
+          console.error('서버가 JSON이 아닌 응답을 보냄:', text);
+          alert('서버 응답 형식 오류. 콘솔을 확인하세요.');
+          return;
         }
-      })
-      .catch(function(err){
-        console.error(err);
+
+        if (!resp.ok || !data.success) {
+          console.error('서버 오류 응답:', resp.status, data);
+          alert(data.message || '처리 실패');
+          return;
+        }
+
+        // 성공
+        sessionStorage.removeItem('kakaoPayload');
+        location.href = data.redirect || '/';
+      } catch (err) {
+        console.error('Fetch 네트워크 오류:', err);
         alert('네트워크 오류가 발생했습니다.');
-      });
+      }
     });
   }
-  </script>
+</script>
+
 
 </body>
 </html>
