@@ -110,6 +110,9 @@ $(document).ready(function() {
           })
           .done(function(data) {
             if (data && data.success) {
+              // ✅ 신규 가입 성공 메시지(서버가 message 보낼 때만 표시)
+              if (data.message) { alert(data.message); }
+
               sessionStorage.removeItem('kakaoPayload');
               window.location.href = data.redirect || './index.php';
             } else {
@@ -130,7 +133,8 @@ $(document).ready(function() {
       });
   });
 });
-  </script>
+</script>
+
 
 </body>
 </html>
