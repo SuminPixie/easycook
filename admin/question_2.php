@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 문의관리</title>
-  <?php include('header.php');      ?>
+  <?php include('./header.php');      ?>
 <main>
   <section class="m-center m-auto mb-5 class_size">
     <!-- 부스러기 -->
@@ -17,9 +17,9 @@
       <!-- 탭컨텐츠 -->
       <div id="tab_con">
         <ul>
-          <li><a href="question_1.php" title="전체" >전체</a></li>
-          <li><a href="question_2.php" title="질문" class="act" >질문</a></li>
-          <li><a href="question_3.php" title="답변완료">답변완료</a></li>
+          <li><a href="./question_1.php" title="전체" >전체</a></li>
+          <li><a href="./question_2.php" title="질문" class="act" >질문</a></li>
+          <li><a href="./question_3.php" title="답변완료">답변완료</a></li>
         </ul>
       </div>
 
@@ -62,7 +62,7 @@
               <!-- 지난강의 보기 -->
               <?php 
                 //페이지네이션 만드는 php 수식
-                $query = "select count(*) from question where answer=''";
+                $query = "select count(*) from easycook_question where answer=''";
                 $result = mysqli_query($conn, $query);
                 $max_Num = mysqli_fetch_array($result);
                 
@@ -82,11 +82,11 @@
                 $datetime = date('y-m-d'); 
 
                 //데이터 불러오기
-                $sql = "select * from question where answer='' order by no DESC limit $start, $list_num;";
+                $sql = "select * from easycook_question where answer='' order by no DESC limit $start, $list_num;";
                 $result = mysqli_query($conn, $sql);
                 while($q=mysqli_fetch_row($result)){
                   $today = (new DateTime())->format('Y-m-d');
-                  $query = "select * from academy_list where class_no='$q[1]'";
+                  $query = "select * from easycook_academy_list where class_no='$q[1]'";
                   $result2 = mysqli_query($conn, $query);
                   $class = mysqli_fetch_array($result2);
                   if(isset($class[2])){
@@ -95,26 +95,26 @@
                       // 답변이 없다면
                         print 
                         "<tr>
-                        <td ><a href='question_view.php?no=".$q[0]."' title='질문보기'>".$q[0]."</a></td>
+                        <td ><a href='./question_view.php?no=".$q[0]."' title='질문보기'>".$q[0]."</a></td>
                         <td style='text-align:left; line-height: 40px;
                         height: 60px;'>
-                          <a href='question_view.php?no=".$q[0]."' title='질문보기'>".$q[3]."
+                          <a href='./question_view.php?no=".$q[0]."' title='질문보기'>".$q[3]."
                             <span>".$class[3]." | ".$q[2]." | ".date("Y.m.d",strtotime($q[5]))."</span>
                           </a>
                         </td>
-                        <td><a href='question_view.php?no=".$q[0]."' title='질문보기'><span class='question_r1'>질문</span></a></td>
+                        <td><a href='./question_view.php?no=".$q[0]."' title='질문보기'><span class='question_r1'>질문</span></a></td>
                       </tr>";
                       }else{
                         print 
                         "<tr>
-                        <td><a href='question_view.php?no=".$q[0]."' title='질문보기'>".$q[0]."</a></td>
+                        <td><a href='./question_view.php?no=".$q[0]."' title='질문보기'>".$q[0]."</a></td>
                         <td style='text-align:left; line-height: 40px;
                         height: 60px;'>
-                          <a href='question_view.php?no=".$q[0]."' title='질문보기'>".$q[3]."
+                          <a href='./question_view.php?no=".$q[0]."' title='질문보기'>".$q[3]."
                           <span>".$class[3]." | ".$q[2]." | ".date("Y.m.d",strtotime($q[5]))."</span>
                           </a>
                         </td>
-                        <td><a href='question_view.php?no=".$q[0]."' title='질문보기'><span class='question_r2'>답변</span></a></td>
+                        <td><a href='./question_view.php?no=".$q[0]."' title='질문보기'><span class='question_r2'>답변완료</span></a></td>
                       </tr>";
                         }
                   }else{
@@ -130,26 +130,26 @@
             <?php //페이지네이션이 들어가는 곳
               //이전페이지
               if($page <= 1){ ?> 
-                <li class="page-item"><a href="question_2.php?page=1" title="이전페이지로" class="page-link"><i class="bi bi-chevron-left"></i></a></li>
+                <li class="page-item"><a href="./question_2.php?page=1" title="이전페이지로" class="page-link"><i class="bi bi-chevron-left"></i></a></li>
                 <?php } else{ ?> 
-                <li class="page-item"><a href="question_2.php?page=<?php echo ($page-1); ?>" title="이전페이지로" class="page-link "><i class="bi bi-chevron-left"></i></a></li>
+                <li class="page-item"><a href="./question_2.php?page=<?php echo ($page-1); ?>" title="이전페이지로" class="page-link "><i class="bi bi-chevron-left"></i></a></li>
                 <?php };?> 
               <?php //여기서부터 페이지 번호출력하기
                 for($print_page=$s_pageNum;$print_page<=$e_pageNum;$print_page++){?>
-                <li class="page-item"><a href="question_2.php?page=<?php echo $print_page; ?>" title="선택페이지로" class="page-link">
+                <li class="page-item"><a href="./question_2.php?page=<?php echo $print_page; ?>" title="선택페이지로" class="page-link">
                   <?php echo $print_page ?>
                 </a></li>
               <?php }; ?>  
               <!-- 다음 버튼 나오는 곳 -->
               <?php if($page>=$total_page){ ?>
-                <li class="page-item"><a href="question_2.php?page=<?php echo $total_page; ?>" title="다음페이지로" class="page-link"><i class="bi bi-chevron-right"></i></a></li>
+                <li class="page-item"><a href="./question_2.php?page=<?php echo $total_page; ?>" title="다음페이지로" class="page-link"><i class="bi bi-chevron-right"></i></a></li>
               <?php }else{ ?>
-                <li class="page-item"><a href="question_2.php?page=<?php echo ($page+1); ?>" title="다음페이지로" class="page-link " ><i class="bi bi-chevron-right"></i></a></li>
+                <li class="page-item"><a href="./question_2.php?page=<?php echo ($page+1); ?>" title="다음페이지로" class="page-link " ><i class="bi bi-chevron-right"></i></a></li>
             <?php };   ?>    
           </nav>
         </div>
       </div> 
     </div>
-  <?php include('footer.php');  ?>
+  <?php include('./footer.php');  ?>
 </body>
 </html>

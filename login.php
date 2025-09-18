@@ -1,3 +1,13 @@
+<?php
+//이미 로그인 한 상태라면 마이페이지로 이동
+if (session_status() === PHP_SESSION_NONE) session_start();
+
+if (!empty($_SESSION['id'])) {
+  header('Location: ./mypage.php');
+  exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>

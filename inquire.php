@@ -8,10 +8,10 @@
   }else{
     $id = null;
   }
-  include('./php/include/dbconn.php');
+  include('./inc/dbconn.php');
   $class_no = $_GET['class_no'];
 
-  $sql = "select * from academy_list where class_no = '$class_no'";
+  $sql = "select * from easycook_academy_list where class_no = '$class_no'";
   // $sql = "select * from academy_list where class_no = '14'";
   $result = mysqli_query($conn,$sql);
   $row = mysqli_fetch_array($result);
@@ -24,13 +24,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 문의하기</title>
     <!-- 공통 헤드정보 삽입 -->
-    <?php include('./php/include/head.php'); ?>
+    <?php include('./inc/head.php'); ?>
     <!-- 서브서식 연결 -->
     <link rel="stylesheet" href="./css/sub.css">
 </head>
 <body>
   <!-- 공통헤더삽입 -->
-  <?php include('./php/include/header_sub.php');?>
+  <?php include('./inc/header_sub.php');?>
 
   <main>
     <section class="in_quire">
@@ -43,7 +43,7 @@
       <h2 class="hide">문의 하기</h2>
       <article>
         <h2>문의 하기</h2>
-        <form action="./php/inquire_input.php" method="post">
+        <form action="./act/inquire_input.php" method="post">
           <input type="hidden" value=" <?php echo $class_no ?>" name="class_no">
           <input type="hidden" value=" <?php echo $id ?>" name="id">
           <input type="text"  placeholder="제목을 입력해주세요" name="question">
@@ -59,9 +59,9 @@
   </main>
 
   <!-- 공통푸터삽입 -->
-  <?php include('./php/include/footer.php');?>
+  <?php include('./inc/footer.php');?>
   <!-- 공통바텀바삽입 -->
-  <?php include('./php/include/bottom.php');?>
+  <?php include('./inc/bottom.php');?>
 
 </body>
 </html>

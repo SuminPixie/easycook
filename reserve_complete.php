@@ -1,5 +1,5 @@
 <?php
-  include('./php/include/dbconn.php');
+  include('./inc/dbconn.php');
 
   // URL 쿼리 문자열에서 데이터 가져오기
   $date = $_GET['date'];
@@ -12,13 +12,13 @@
   $formattedDate = $dateObj ? $dateObj->format('Y.m.d') : $date;
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>예약완료</title>
     <!-- 공통 헤드정보 삽입 -->
-    <?php include('./php/include/head.php'); ?>
+    <?php include('./inc/head.php'); ?>
     <!-- 메인서식 연결 -->
     <link rel="stylesheet" href="./css/main.css">
 
@@ -80,7 +80,7 @@
 </head>
 <body>
   <!-- 공통헤더삽입 -->
-  <?php include('./php/include/header_sub.php');?>
+  <?php include('./inc/header_sub.php');?>
 
   <main>
     <section class="re_com">
@@ -117,7 +117,7 @@
   </main>
 
   <!-- 공통바텀바삽입 -->
-  <?php include('./php/include/bottom.php');?>
+  <?php include('./inc/bottom.php');?>
 
 </body>
 </html>

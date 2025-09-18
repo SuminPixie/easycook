@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 수강생 후기</title>
   <?php
-    include('header.php');      
+    include('./header.php');      
   ?>
 <main>
   <section class="m-center m-auto mb-5 class_size">
@@ -43,7 +43,7 @@
         $s_id = $_SESSION['id'];   
     
         //나의 강사코드를 찾아라
-        $query = "select * from register where id='$s_id'";
+        $query = "select * from easycook_register where id='$s_id'";
         $result = mysqli_query($conn, $query);
         $class = mysqli_fetch_array($result);        // echo '강사코드'.$class[7];
         ?>
@@ -59,14 +59,14 @@
           <tbody>
             <?php    
               // 리뷰 데이터 가져오기
-              $sql = "SELECT * FROM review order by no Desc limit 50";
+              $sql = "SELECT * FROM easycook_review order by no Desc limit 50";
               $result = mysqli_query($conn, $sql);   
       
               // 데이터 출력
               $row_count = 0; // 번호를 매기기 위한 변수 초기화
               while ($r = mysqli_fetch_array($result)) {
                   //academy_list에서 데이터 받아오기
-                  $sql2 = "select * from academy_list where class_no='$r[1]' and teacher_code='$class[7]';";
+                  $sql2 = "select * from easycook_academy_list where class_no='$r[1]' and teacher_code='$class[7]';";
                   $result2 = mysqli_query($conn, $sql2);
                   $db = mysqli_fetch_array($result2);
       
@@ -104,13 +104,13 @@
           </tbody>
         </table>
         <div class="mt-5 mb-5" style="position:relative;">
-          <a href="index.php" title="메인으로" class="admin_btn admin_btn_yellow position_l_b">메인으로</a>
+          <a href="./index.php" title="메인으로" class="admin_btn admin_btn_yellow position_l_b">메인으로</a>
         </div>
       </article>
     </form>
   </section>
 <?php
-include('footer.php');
+include('./footer.php');
 ?>
 </body>
 </html>

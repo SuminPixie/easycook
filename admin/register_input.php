@@ -1,5 +1,5 @@
 <?php
-include('../include/dbconn.php');
+include('../inc/dbconn.php');
 
     // echo '출력';
     // $profile = $_POST['profile'];
@@ -62,7 +62,7 @@ include('../include/dbconn.php');
       // 허용할 확장자를 jpg, bmp, gif, png로 정함, 그 외에는 업로드 불가
       if($extStatus){
         // 임시 파일 옮길 디렉토리 및 파일명
-        $resFile = "../../uploads/profile/{$_FILES['img']['name']}";
+        $resFile = "../uploads/profile/{$_FILES['img']['name']}";
         $resFile_input = "{$_FILES['img']['name']}";
         // 임시 저장된 파일을 우리가 저장할 디렉토리 및 파일명으로 옮김
         $imageUpload = move_uploaded_file($tempFile, $resFile);
@@ -108,7 +108,7 @@ include('../include/dbconn.php');
 
     // 데이터 수정하기
     $sql = "
-    update teacher_list 
+    update easycook_teacher_list 
     set 
     profile ='$resFile_input',
     birth = '$t_birth',
@@ -127,7 +127,7 @@ include('../include/dbconn.php');
 
     if($result){
       echo "<script>alert('나의 정보 수정이 완료되었습니다.')</script>";
-      echo "<script>location.replace('register.php');</script>";
+      echo "<script>location.replace('./register.php');</script>";
     }else{
       echo "<script>alert(등록 실패 : ". mysqli_error($conn).")</script>";
       mysqli_close($conn);

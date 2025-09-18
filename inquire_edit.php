@@ -1,5 +1,5 @@
 <?php
-  include('./php/include/dbconn.php');
+  include('./inc/dbconn.php');
   if (session_status() === PHP_SESSION_NONE) {
     session_start();
   }
@@ -9,11 +9,11 @@
   }else{
     $id = null;
   }
-  include('./php/include/dbconn.php');
+  include('./inc/dbconn.php');
   $no = $_POST['no'];
   $edit = $_POST['edit'];
 
-  $sql2 = "select * from question where no = '$no'";
+  $sql2 = "select * from easycook_question where no = '$no'";
   // $sql = "select * from academy_list where class_no = '14'";
   $result2 = mysqli_query($conn,$sql2);
   $row2 = mysqli_fetch_array($result2);
@@ -29,13 +29,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>문의 수정</title>
     <!-- 공통 헤드정보 삽입 -->
-    <?php include('./php/include/head.php'); ?>
+    <?php include('./inc/head.php'); ?>
     <!-- 서브서식 연결 -->
     <link rel="stylesheet" href="./css/sub.css">
 </head>
 <body>
   <!-- 공통헤더삽입 -->
-  <?php include('./php/include/header.php');?>
+  <?php include('./inc/header.php');?>
 
   <main>
     <section class="in_quire">
@@ -46,7 +46,7 @@
           
           <!-- 수정 페이지 -->
           <h2>문의 수정</h2>
-          <form action="./php/inquire_update.php" method="post">
+          <form action="./act/inquire_update.php" method="post">
             <input type="hidden" value=" <?php echo $no ?>" name="no">
             <input type="text" value="<?php echo $row2['question'] ?>"  placeholder="<?php echo $row2['question'] ?>" name="question">
             <textarea  name="question_memo" ><?php echo $row2['question_memo'] ?></textarea>
@@ -58,7 +58,7 @@
           </form>
         <?php }else{ 
           // <!-- 없으면 삭제php -->
-          $sql = "delete from question where no='$no'";
+          $sql = "delete from easycook_question where no='$no'";
           $result = mysqli_query($conn, $sql);
 
           if ($result) {
@@ -72,7 +72,7 @@
   </main>
 
   <!-- 공통바텀바삽입 -->
-  <?php include('./php/include/bottom.php');?>
+  <?php include('./inc/bottom.php');?>
 
 </body>
 </html>

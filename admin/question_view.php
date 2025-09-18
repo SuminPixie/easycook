@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 문의관리</title>
-  <?php include('header.php');        ?>
+  <?php include('./header.php');        ?>
   <main>
     <section class="m-center m-auto mb-5 class_size">
 
@@ -27,12 +27,12 @@
             $no = $_GET['no'];
             
             // 질문 내용 가져오기
-            $sql = "select * from question where no='$no;'";
+            $sql = "select * from easycook_question where no='$no;'";
             $result = mysqli_query($conn, $sql);
             $q=mysqli_fetch_row($result);
             
             // 강의정보 가져오기
-            $query = "select * from academy_list where class_no='$q[1]'";
+            $query = "select * from easycook_academy_list where class_no='$q[1]'";
             $result2 = mysqli_query($conn, $query);
             $class = mysqli_fetch_array($result2);
             ?>
@@ -77,8 +77,8 @@
             </tbody> 
           </table>
           <div class="mt-5 mb-3" style="position:relative;">
-            <a href="question_1.php" title="목록으로" class="admin_btn admin_btn_yellow position_l_b" >이전페이지</a>
-            <input type="submit" value="답변완료" class="admin_btn admin_btn_red position_r_b">
+            <a href="./question_1.php" title="목록으로" class="admin_btn admin_btn_yellow position_l_b" >이전페이지</a>
+            <input type="submit" value="답변하기" class="admin_btn admin_btn_red position_r_b">
           </div>   
         </article>
       </form>
@@ -107,6 +107,6 @@
       }
     </script>
     </section>
-  <?php include('footer.php');  ?>
+  <?php include('./footer.php');  ?>
 </body>
 </html>

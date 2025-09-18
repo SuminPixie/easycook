@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 회원가입</title>
   <!-- 공통 헤드정보 삽입 -->
-  <?php include('./php/include/head.php'); ?>
+  <?php include('./inc/head.php'); ?>
   <style>
     section{
       max-width: 1400px;
@@ -29,7 +29,7 @@
 </head>
 <body>
   <!-- 공통헤더삽입 -->
-  <?php include('./php/include/header_sub.php');?>
+  <?php include('./inc/header_sub.php');?>
 
   <main>
     <section>
@@ -70,7 +70,7 @@
         let formData = $(this).serialize();
 
         // 서버로 데이터 전송
-        $.post('./php/register_teacher_check.php', formData)
+        $.post('./act/register_teacher_check.php', formData)
           .done(function(response) {
             if (response.trim() === '사번이 일치합니다.') {
               //회원가입 폼 이동

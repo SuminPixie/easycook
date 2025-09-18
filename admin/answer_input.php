@@ -2,7 +2,7 @@
 
 <?php 
 
-include('../include/dbconn.php');
+include('../inc/dbconn.php');
 
 $no = $_POST['q_num'];
 echo $no;
@@ -16,13 +16,13 @@ echo $answer_id;
 echo $answer_memo;
 echo $answer_time;
 
-$sql = "select * from question where no='$no'";
+$sql = "select * from easycook_question where no='$no'";
 $result = mysqli_query($conn, $sql);
 $q=mysqli_fetch_row($result);
 
 // 답변 작성
 $sql = "
-update question
+update easycook_question
 set answer_id= '$answer_id', 
 answer = '$answer_memo', 
 answer_time='$answer_time'

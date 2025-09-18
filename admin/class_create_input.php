@@ -1,6 +1,6 @@
 <?php
 
-include('../include/dbconn.php');
+include('../inc/dbconn.php');
 
 $class_no = $_POST['class_no'];
 
@@ -54,7 +54,7 @@ if($fileType == 'image'){
 	// 허용할 확장자를 jpg, bmp, gif, png로 정함, 그 외에는 업로드 불가
 	if($extStatus){
 		// 임시 파일 옮길 디렉토리 및 파일명
-		$resFile = "../../uploads/class_main/{$_FILES['img']['name']}";
+		$resFile = "../uploads/class_main/{$_FILES['img']['name']}";
 		$resFile_input = "{$_FILES['img']['name']}";
 		// 임시 저장된 파일을 우리가 저장할 디렉토리 및 파일명으로 옮김
 		$imageUpload = move_uploaded_file($tempFile, $resFile);
@@ -110,7 +110,7 @@ if($fileType2 == 'image'){
 	// 허용할 확장자를 jpg, bmp, gif, png로 정함, 그 외에는 업로드 불가
 	if($extStatus2){
 		// 임시 파일 옮길 디렉토리 및 파일명
-		$resFile2 = "../../uploads/class_detail/{$_FILES['parent_img']['name']}";
+		$resFile2 = "../uploads/class_detail/{$_FILES['parent_img']['name']}";
 		$resFile_input2 = "{$_FILES['parent_img']['name']}";
 		// 임시 저장된 파일을 우리가 저장할 디렉토리 및 파일명으로 옮김
 		$imageUpload2 = move_uploaded_file($tempFile2, $resFile2);
@@ -148,7 +148,7 @@ $update = $_POST['update'];
 // 수정버튼이냐?
 if(empty($update)){
 	// echo "강의 개설";
-	$sql = "insert into academy_list set
+	$sql = "insert into easycook_academy_list set
 	name = '$name',
 	code = '$code',
 	category1 = '$category1',
@@ -185,7 +185,7 @@ if(empty($update)){
 		// // echo $name;
 		// echo "강의 수정";
 		$sql = "
-		update academy_list set
+		update easycook_academy_list set
 		name = '$name',
 		code = '$code',
 		category1 = '$category1',

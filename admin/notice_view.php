@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 공지관리</title>
-  <?php include('header.php');  ?>
+  <?php include('./header.php');  ?>
   <main>
     <section class="m-center m-auto mb-5 class_size">
       <?php
@@ -15,12 +15,12 @@
         $no = $_GET['no'];   
       
         //board 공지사항에서 데이터 받아오기
-        $sql = "select * from board where no='$no';";
+        $sql = "select * from easycook_board where no='$no';";
         $result = mysqli_query($conn, $sql);
         $db = mysqli_fetch_array($result); // echo $db[1];
 
         //academy_list에서 데이터 받아오기
-        $sql2 = "select * from academy_list where class_no='$db[1]';";
+        $sql2 = "select * from easycook_academy_list where class_no='$db[1]';";
         $result2 = mysqli_query($conn, $sql2);
         $class = mysqli_fetch_array($result2);
       ?>
@@ -50,7 +50,7 @@
         </table>
         <div class="mt-5 mb-3" style="position:relative;">
           <!-- 목록으로 -->
-          <a href="notice_list.php?class_no=<?php echo $db[1];?>" title="목록으로" class="admin_btn admin_btn_yellow position_l_b">목록으로</a>
+          <a href="./notice_list.php?class_no=<?php echo $db[1];?>" title="목록으로" class="admin_btn admin_btn_yellow position_l_b">목록으로</a>
           <!-- 공지 수정/작성 하기 -->
           <input type="submit" value="수정완료" class="admin_btn admin_btn_red position_r_b">
           <!-- 공지 삭제 하기 -->
@@ -74,7 +74,7 @@
 
     </script>
     <?php
-    include('footer.php');
+    include('./footer.php');
     ?>
 </body>
 </html>

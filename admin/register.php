@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 나의 정보 수정</title>
-  <?php  include('header.php'); ?>
+  <?php  include('./header.php'); ?>
 
 <main>
   <section class="m-center m-auto mb-5 class_size">
@@ -18,16 +18,16 @@
     <article>
       <h3>정보수정</h3>
       <!-- 선생님 자료는 미리 등록되어 있어서 불러오기가 기본 기능임 -->
-      <form action="register_input.php" method="post" enctype="multipart/form-data" name="나의 정보 수정">
+      <form action="./register_input.php" method="post" enctype="multipart/form-data" name="나의 정보 수정">
 
         <?php 
           // 아이디와 일치하는 강사코드 받아오기
-          $sql_t = "select * from register where id='$s_id';";
+          $sql_t = "select * from easycook_register where id='$s_id';";
           $result_t = mysqli_query($conn, $sql_t);
           $t = mysqli_fetch_array($result_t);
 
           // 선생님 리스트의 정보 받아오기
-          $sql_t2 = "select * from teacher_list where teacher_code='$t[7]';";
+          $sql_t2 = "select * from easycook_teacher_list where teacher_code='$t[7]';";
           $result_t2 = mysqli_query($conn, $sql_t2);
           $t2 = mysqli_fetch_array($result_t2);
         ?>
@@ -41,10 +41,10 @@
                 <input type="file" class="form-control" id="img" name="img">
                 <label class="input-group-text" for="img">
                   <!-- <i class="bi bi-camera"></i> -->
-                  <img id="preview" src="../../uploads/profile/<?php echo $t2[3];?>" alt="프로필 미리보기" style="max-width: 300px; ">
+                  <img id="preview" src="../uploads/profile/<?php echo $t2[3];?>" alt="프로필 미리보기" style="max-width: 300px; ">
                 </label>
               </div>
-              <a href="register_img_del.php?teacher_code=<?php echo $t[7];?>" title="프로필 삭제" class="admin_btn admin_btn_del mt-1" style="left:308px; top:419px;">프로필 삭제</a>
+              <a href="./register_img_del.php?teacher_code=<?php echo $t[7];?>" title="프로필 삭제" class="admin_btn admin_btn_del mt-1" style="left:308px; top:419px;">프로필 삭제</a>
             </div>
 
           <script>
@@ -156,7 +156,7 @@
     </div>
   </section>
   <?php
-  include('footer.php');
+  include('./footer.php');
   ?>
 </body>
 </html>

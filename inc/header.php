@@ -685,11 +685,11 @@
                 <img src='./uploads/profile/$profile' alt='프로필이미지'>
                 <a href='./mypage.php' title='마이페이지'>$name 님 환영합니다.</a>
                 <span>
-                  <a style='margin-right: 10px;' href='./php/logout.php' title='로그아웃'>로그아웃</a>
+                  <a style='margin-right: 10px;' href='./act/logout.php' title='로그아웃'>로그아웃</a>
                   ";
                   // $teacher_code가 존재하면 강사페이지 링크 추가
                   if ($teacher_code) {
-                    echo "<a style='margin-right: 10px;' href='./php/admin/index.php' title='강사페이지'>강사페이지</a>";
+                    echo "<a style='margin-right: 10px;' href='./admin/index.php' title='강사페이지'>강사페이지</a>";
                   }
                 "</span>";
               } else {
@@ -902,10 +902,10 @@
               <i class='bi bi-chevron-right'></i>
             </div>
             <div class='mytitle_btn'>
-              <a class='btn btn-outline-secondary' href='./php/logout.php' title='로그아웃'>로그아웃</a>";
+              <a class='btn btn-outline-secondary' href='./act/logout.php' title='로그아웃'>로그아웃</a>";
               // $teacher_code가 존재하면 강사페이지 링크 추가
               if ($teacher_code) {
-                echo "<a class='btn btn-outline-secondary' href='./php/admin/index.php' title='강사페이지'>강사페이지</a>";
+                echo "<a class='btn btn-outline-secondary' href='./admin/index.php' title='강사페이지'>강사페이지</a>";
               }
               echo "</div>";
 
@@ -1119,24 +1119,24 @@
 
     <!--알림 내용-->
     <ul>
-    `<li>
+      <li>
         <p>추석연휴 안내</p>
-        <p>2024-07-30</p>
+        <p>2099-08-30</p>
         <p>9월달 추석 휴강일 안내드립니다. </p>
       </li>
       <li>
         <p>여름방학 안내</p>
-        <p>2024-07-30</p>
+        <p>2099-07-30</p>
         <p>8월달 학원 여름방학 안내드립니다. </p>
       </li>
       <li>
         <p>실습실 고장 안내</p>
-        <p>2024-06-10</p>
+        <p>2099-06-10</p>
         <p>현재 101호 실습실이 고장이나 안내드립니다.</p>
       </li>
       <li>
         <p>5월 휴강일 안내</p>
-        <p>2024-05-01</p>
+        <p>2099-05-01</p>
         <p>5월달 휴강일 안내드립니다. </p>
       </li>
     </ul>
@@ -1263,7 +1263,7 @@
         if (sessionId && (button.text().trim() === '출석체크')) {
           // AJAX 요청 보내기
           $.ajax({
-            url: './php/attendance_input.php',
+            url: './act/attendance_input.php',
             type: 'POST',
             data: {
               class_no: classNo,

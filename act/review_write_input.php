@@ -1,6 +1,6 @@
 <?php
 
-include('./include/dbconn.php');
+include('../inc/dbconn.php');
 $starRating = $_POST['starRating'];
 $review = $_POST['re_view'];
 $code = $_POST['code'];
@@ -32,7 +32,7 @@ echo $photo_files;
 
 
 // /*쿼리문 여기 */
-$sql = "INSERT INTO review (class_no,code,star,img,review,id,name,datetime) VALUES ('$class_no','$code','$starRating','$photo_files','$review','$student_id','$student_name','$datetime')";
+$sql = "INSERT INTO easycook_review (class_no,code,star,img,review,id,name,datetime) VALUES ('$class_no','$code','$starRating','$photo_files','$review','$student_id','$student_name','$datetime')";
 $result = mysqli_query($conn,$sql);
 
 if ($result) {

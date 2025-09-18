@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 학원소식</title>
   <?php
-    include('header.php');      
+    include('./header.php');      
   ?>
 <main>
   <section class="m-center m-auto mb-5 class_size">
@@ -24,7 +24,7 @@
         <caption>학원소식</caption>
         <?php 
         $no = $_GET['no'];
-        $sql = "select * from ec_notice where no='$no';";
+        $sql = "select * from easycook_notice where no='$no';";
         $result = mysqli_query($conn, $sql);              
         $db=mysqli_fetch_array($result);
         ?>
@@ -41,14 +41,14 @@
         </tr>
       </table>
       <!-- 목록으로 -->
-      <a href="EC_notice.php" title="목록으로" class="admin_btn admin_btn_red">목록으로</a>
+      <a href="./EC_notice.php" title="목록으로" class="admin_btn admin_btn_red">목록으로</a>
     </article>
     <div class="copyright">
       Copyright ⓒ Easy Cook, All Rights Reserved.
     </div>
   </section>
 <?php
-include('footer.php');
+include('./footer.php');
 ?>
 </body>
 </html>

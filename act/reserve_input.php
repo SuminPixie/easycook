@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // 데이터베이스 연결
-include('./include/dbconn.php');
+include('../inc/dbconn.php');
 
 // 로그인 체크
 if (!isset($_SESSION['id'])) {
@@ -36,7 +36,7 @@ date_default_timezone_set('Asia/Seoul');
 $datetime = date('Y-m-d H:i:s', time());
 
 // 이미 예약된 이력 확인
-$check_sql = "SELECT * FROM room WHERE id='$id' AND room_date='$date' AND room='$room' AND (start < '$end' AND end > '$start')";
+$check_sql = "SELECT * FROM easycook_room WHERE id='$id' AND room_date='$date' AND room='$room' AND (start < '$end' AND end > '$start')";
 $check_result = mysqli_query($conn, $check_sql);
 
 
@@ -51,7 +51,7 @@ if (mysqli_num_rows($check_result) > 0) {
   </script>";
 } else {
   // 예약 진행
-  $sql = "INSERT INTO room (class_no, id, name, room_date, room, start, end, datetime) VALUES ('$class_no', '$id', '$name', '$date', '$room', '$start', '$end', '$datetime')";
+  $sql = "INSERT INTO easycook_room (class_no, id, name, room_date, room, start, end, datetime) VALUES ('$class_no', '$id', '$name', '$date', '$room', '$start', '$end', '$datetime')";
 
   // 쿼리 실행 여부 확인
   if (mysqli_query($conn, $sql)) {

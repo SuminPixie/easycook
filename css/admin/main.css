@@ -38,13 +38,15 @@
 .board {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3개의 동일한 너비 칼럼 */
-  grid-template-rows: repeat(2, auto);  /* 행의 높이는 내용에 따라 자동 조정 */
-  grid-gap: 30px; /* 칼럼과 행 사이의 간격 */
+  /* 화면에서 칸이 잘리면 자동으로 열 수를 줄임 */
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-auto-rows: auto;      /* 행은 내용에 맞춤 */
+  gap: 30px;  
 }
 
 .board_con{
   width: 100%;
+  min-width: 0;              /* 긴 내용 때문에 칸이 늘어나지 않게 */
   border: 1px solid var(--gray);
   border-radius: 10px;
 }
@@ -58,7 +60,6 @@
 .board_con div:nth-child(2) ul li{
   line-height: 45px;
   padding: 0 10px;
-  font-size: var( --fs-small);
   width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -76,12 +77,13 @@
 .board_con > div:nth-child(2) ul > li > a > ul > li:nth-child(2){
   width: 35%;
   text-align: right;
-  font-size: var(--fs-xsmall);
+  font-size: var(--fs-small);
 }
 
 .board_con div:nth-child(2) ul li a ul{
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid #eee;
 }
 
 .board_con div:nth-child(2) ul li a ul .board_sub{
@@ -90,9 +92,9 @@
   line-height: 30px;
 }
 .board_con div:nth-child(2) ul li a ul .board_sub span{
-  font-weight: var(--fw-thin);
-  font-size: var(--fs-xsmall);
+  font-size: var(--fs-small);
   line-height: 10px;
+  color: #999;
 }
 
 .board_title{
@@ -190,7 +192,11 @@
   width: 100%;
   overflow-x: auto; /* 스크롤바 자동 표시 */
 }
-
+.scrollbar-visible::-webkit-scrollbar {
+  display: block !important;
+}
+.scrollbar-visible::-webkit-scrollbar-thumb { border-radius: 6px; background: #aaa; }
+.scrollbar-visible::-webkit-scrollbar-track { background: #eee; }
 
 .student thead tr th:nth-child(3),
 .student tbody tr td:nth-child(3),
@@ -249,7 +255,7 @@
 
 .span_subtitle{
   line-height: 20px;
-  font-size: var(--fs-xsmall);
+  font-size: var(--fs-small);
   overflow: hidden;
   color: var(--darkbrown);
 }
@@ -284,7 +290,7 @@
 
 .question_list tbody tr td:nth-child(2) span{
   line-height: 20px;
-  font-size: var(--fs-xsmall);
+  font-size: var(--fs-small);
   position: absolute; top: 30px; left: 0px;
 }
 

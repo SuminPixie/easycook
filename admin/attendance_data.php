@@ -1,8 +1,8 @@
 <?php
-include('header.php');
+include('./header.php');
 
 // 쿼리 생성
-$sql = "SELECT student_name, attendance_date FROM attendance";
+$sql = "SELECT student_name, attendance_date FROM easycook_attendance";
 
 // 쿼리 실행
 $result = $conn->query($sql);

@@ -6,7 +6,7 @@
   <title>이지쿡 | 공지관리</title>
 
   <?php
-    include('header.php');  
+    include('./header.php');  
   ?>
   <main>
     <section class="m-center m-auto mb-5 class_size">
@@ -23,7 +23,7 @@
           $class_no = $_GET['class_no'];        // echo "번호는".$class_no;
 
           // 강의정보 가져오기
-          $query = "select * from academy_list where class_no='$class_no'";
+          $query = "select * from easycook_academy_list where class_no='$class_no'";
           $result = mysqli_query($conn, $query);
           $class = mysqli_fetch_array($result);
         ?>
@@ -41,7 +41,7 @@
           </div>
           <div class="mb-3">
             <label for="memo" class="form-label">공지내용 (<span id="remainingChars" class="p01">255</span>자 남음)</label>
-            <textarea name="memo" id="memo" class="form-control" cols="50" rows="10"oninput="txtCount(this, 255)"><?php echo htmlspecialchars($q[7], ENT_QUOTES, 'UTF-8'); ?></textarea>
+            <textarea name="memo" id="memo" class="form-control" cols="50" rows="10"oninput="txtCount(this, 255)"></textarea>
           </div>
           <script>
             function txtCount(memoElement, maxlimit) {
@@ -63,6 +63,6 @@
         </article>
       </form>
     </section>
-  <?php include('footer.php');    ?>
+  <?php include('./footer.php');    ?>
 </body>
 </html>

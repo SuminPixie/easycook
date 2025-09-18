@@ -1,6 +1,6 @@
 <?php
 
-include('./include/dbconn.php');
+include('../inc/dbconn.php');
 
 
 $id = trim($_POST['id']);
@@ -16,7 +16,7 @@ $datetime = date("Y-m-d H:i:s");
 // echo $question.'<br>';
 // echo $question_memo.'<br>';
 
-$sql = "INSERT INTO question (class_no,question_id,question,question_memo,question_time) VALUES ('$class_no','$id','$question','$question_memo','$datetime')";
+$sql = "INSERT INTO easycook_question (class_no,question_id,question,question_memo,question_time) VALUES ('$class_no','$id','$question','$question_memo','$datetime')";
 
 $result = mysqli_query($conn,$sql);
 

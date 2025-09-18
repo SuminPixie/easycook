@@ -109,17 +109,17 @@
 
               if(empty($q[7])){
                 print 
-              "<tr>
+              "<tr class='inq_list'>
                 <td>$row_number</td>
                 <td>
-                  <a href='inquire_view.php?no=".$q[0]."' title=''>
-                    <span class='question_r1'>질문</span>
+                  <a href='inquire_view.php?no=".$q[0]."' title='' class='inq_btn'>
+                    <span class='question_r1'>답변대기</span>
                   </a>
                 </td>
                 <td>
                   <a href='inquire_view.php?no=".$q[0]."' title=''>
+                    <span style='color:#999;'>".$class[1]."</span>
                     <b>".$q[3]."</b>
-                    <span>".$class[3]."</span>
                   </a>
                 </td>
                 <td><a href='inquire_view.php?no=".$q[0]."' title=''>".date("y-m-d",strtotime($q[5]))."</a></td>
@@ -132,12 +132,15 @@
                   <a href='inquire_view.php?no=".$q[0]."' title=''><span class='question_r2'>답변완료</span></a>
                 </td>
                 <td>
-                  <a href='inquire_view.php?no=".$q[0]."' title=''><b>".$q[3]."</b>
-                  <span>".$class[3]."</span>
+                  <a href='inquire_view.php?no=".$q[0]."' title=''>
+                    <span style='color:#999;'>".$class[1]."</span>
+                    <b>".$q[3]."</b>
                   </a>
-                  </td>
-                  <td><a href='inquire_view.php?no=".$q[0]."' title=''>".date("y-m-d",strtotime($q[5]))."</a></td>
-                  </tr>";
+                </td>
+                <td>
+                  <a href='inquire_view.php?no=".$q[0]."' title=''>".date("y-m-d",strtotime($q[5]))."</a>
+                </td>
+              </tr>";
                 }
                 // 행 번호 감소
                 $row_number--;

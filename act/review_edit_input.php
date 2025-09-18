@@ -1,5 +1,5 @@
 <?php
-  include('./include/dbconn.php');
+  include('../inc/dbconn.php');
 
   $no = $_POST['no'];
   $starRating = $_POST['starRating'];
@@ -35,10 +35,10 @@
   //$photo_files의 값이 있다면 
   if(empty($photo_files)){
     // /*쿼리문 여기 */
-    $sql = "update review set star='$starRating', img='$photos' ,review='$review',datetime='$datetime' where no = '$no'";
+    $sql = "update easycook_review set star='$starRating', img='$photos' ,review='$review',datetime='$datetime' where no = '$no'";
   }else{
     // /*쿼리문 여기 */
-    $sql = "update review set star='$starRating', img='$photo_files' ,review='$review',datetime='$datetime' where no = '$no'";
+    $sql = "update easycook_review set star='$starRating', img='$photo_files' ,review='$review',datetime='$datetime' where no = '$no'";
   }
 
 

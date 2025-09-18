@@ -1,5 +1,5 @@
 <?php
-include('./include/dbconn.php');
+include('../inc/dbconn.php');
 
 // class_no를 URL 파라미터로 받기
 $class_no = $_GET['class_no'];
@@ -30,7 +30,7 @@ foreach ($time_slots as $label => $times) {
   
   $sql = "
       SELECT COUNT(*) AS reserved_count 
-      FROM room 
+      FROM easycook_room 
       WHERE room = '$room' 
       AND room_date = '$selected_date' 
       AND start >= '$start_time' 

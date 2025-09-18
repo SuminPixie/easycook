@@ -8,10 +8,10 @@
   }else{
     $id = null;
   }
-  include('./php/include/dbconn.php');
+  include('./inc/dbconn.php');
   $no = $_GET['no'];
 
-  $sql2 = "select * from question where no = '$no'";
+  $sql2 = "select * from easycook_question where no = '$no'";
   // $sql = "select * from academy_list where class_no = '14'";
   $result2 = mysqli_query($conn,$sql2);
   $row2 = mysqli_fetch_array($result2);
@@ -19,26 +19,26 @@
   $class_no = $row2['class_no'];
 
 
-  $sql = "select * from academy_list where class_no = '$class_no'";
+  $sql = "select * from easycook_academy_list where class_no = '$class_no'";
   // $sql = "select * from academy_list where class_no = '14'";
   $result = mysqli_query($conn,$sql);
   $row = mysqli_fetch_array($result);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡</title>
     <!-- 공통 헤드정보 삽입 -->
-    <?php include('./php/include/head.php'); ?>
+    <?php include('./inc/head.php'); ?>
     <!-- 서브서식 연결 -->
     <link rel="stylesheet" href="./css/sub.css">
 </head>
 <body>
   <!-- 공통헤더삽입 -->
-  <?php include('./php/include/header_sub.php');?>
+  <?php include('./inc/header_sub.php');?>
 
   <main>
     <section class="in_quire">
@@ -50,7 +50,7 @@
       
       <h2>문의 보기</h2>
       
-      <?php if($row2{'answer'} == '' ){ ?>
+      <?php if ($row2['answer'] == '') { ?>
         <!--답변이 없다면-->
         <article class="inq_view ina">
           <ul>
@@ -101,7 +101,7 @@
   
         <!--답변 달리는곳-->
         <article class="answer_b">
-          <span style="background: var(--yellow); width:50px; height: 24px; display: block; text-align: center;line-height: 24px; border-radius: 5px; margin-bottom: 10px;">답변</span>
+          <span style="color:white; background: var(--black); width:50px; height: 24px; display: block; text-align: center;line-height: 24px; border-radius: 5px; margin-bottom: 10px;">답변</span>
           <p><?php echo nl2br($row2['answer']) ?></p>
         </article>
         <!-- 목록으로 버튼 -->
@@ -114,7 +114,7 @@
   </main>
 
   <!-- 공통바텀바삽입 -->
-  <?php include('./php/include/bottom.php');?>
+  <?php include('./inc/bottom.php');?>
 
 </body>
 </html>

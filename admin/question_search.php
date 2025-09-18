@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 나의 강의실</title>
   <?php
-    include('header.php');      
+    include('./header.php');      
   ?>
 <main>
   <section class="m-center m-auto mb-5 class_size">
@@ -36,33 +36,33 @@
                 $search = $_POST['search'];    // echo $search;
 
                 //입력한 값이랑 데이터 값을 비교한다
-                $sql = "select * from question where question like '%".$search."%' or question_memo like '%".$search."%' order by no DESC";
+                $sql = "select * from easycook_question where question like '%".$search."%' or question_memo like '%".$search."%' order by no DESC";
                 $result = mysqli_query($conn, $sql);                
                 while($q=mysqli_fetch_row($result)){
-                  $query = "select * from academy_list where class_no='$q[1]'";
+                  $query = "select * from easycook_academy_list where class_no='$q[1]'";
                   $result2 = mysqli_query($conn, $query);
                   $class = mysqli_fetch_array($result2);
                   if(empty($q[7])){
                     print 
                     "<tr>
-                    <td><a href='question_view.php?no=".$q[0]."' title=''>".$q[0]."</a></td>
+                    <td><a href='./question_view.php?no=".$q[0]."' title=''>".$q[0]."</a></td>
                     <td>
-                      <a href='question_view.php?no=".$q[0]."' title=''>".$q[3]."
+                      <a href='./question_view.php?no=".$q[0]."' title=''>".$q[3]."
                       <span>".$class[3]." | ".$q[2]." | ".date("Y.m.d",strtotime($q[5]))."</span>
                       </a>
                     </td>
-                    <td><a href='question_view.php?no=".$q[0]."' title=''><span class='question_r1'>질문</span></a></td>
+                    <td><a href='./question_view.php?no=".$q[0]."' title=''><span class='question_r1'>질문</span></a></td>
                   </tr>";
                   }else{
                     print 
                     "<tr>
-                    <td><a href='question_view.php?no=".$q[0]."' title=''>".$q[0]."</a></td>
+                    <td><a href='./question_view.php?no=".$q[0]."' title=''>".$q[0]."</a></td>
                     <td>
-                      <a href='question_view.php?no=".$q[0]."' title=''>".$q[3]."
+                      <a href='./question_view.php?no=".$q[0]."' title=''>".$q[3]."
                       <span>".$class[3]." | ".$q[2]." | ".date("Y.m.d",strtotime($q[5]))."</span>
                       </a>
                     </td>
-                    <td><a href='question_view.php?no=".$q[0]."' title=''><span class='question_r2'>답변</span></a></td>
+                    <td><a href='./question_view.php?no=".$q[0]."' title=''><span class='question_r2'>답변</span></a></td>
                   </tr>";
                 };
                 };?>
@@ -71,13 +71,13 @@
         </div>
       </div> 
       <div class="mt-5 mb-3" style="position:relative;">
-        <a href="question_1.php" title="다시 검색하기" class="admin_btn admin_btn_yellow position_l_b">다시 검색</a>
+        <a href="./question_1.php" title="다시 검색하기" class="admin_btn admin_btn_yellow position_l_b">다시 검색</a>
       </div>
     </div>
 
   </section>
 <?php
-include('footer.php');
+include('./footer.php');
 ?>
 </body>
 </html>

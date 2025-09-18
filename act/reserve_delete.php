@@ -15,7 +15,7 @@
   $id = $_SESSION['id'];
 
   if ($action == 'remove') {
-    $sql = "DELETE FROM room WHERE no = '$no' AND id = '$id'";
+    $sql = "DELETE FROM easycook_room WHERE no = '$no' AND id = '$id'";
     if (mysqli_query($conn, $sql)) {
       echo "성공: 신청이 취소되었습니다.";
     } else {

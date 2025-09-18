@@ -3,7 +3,7 @@
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
-include('./php/include/dbconn.php');
+include('./inc/dbconn.php');
 
 if (isset($_SESSION['id'])) {
   // $id = $_SESSION['id'];
@@ -12,7 +12,7 @@ if (isset($_SESSION['id'])) {
   //내가 선택한 강의정보 조회
   $class_no = $_GET['class_no'];
 
-  $sql = "select * from academy_list where class_no = '$class_no'";
+  $sql = "select * from easycook_academy_list where class_no = '$class_no'";
   $result = mysqli_query($conn,$sql);
   $row = mysqli_fetch_array($result);
   
@@ -31,7 +31,7 @@ if (isset($_SESSION['id'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>실습실 예약</title>
   <!-- 공통 헤드정보 삽입 -->
-  <?php include('./php/include/head.php'); ?>
+  <?php include('./inc/head.php'); ?>
 
   <!-- flatpickr CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -173,13 +173,13 @@ if (isset($_SESSION['id'])) {
 </head>
 <body>
   <!-- 공통헤더삽입 -->
-  <?php include('./php/include/header_sub.php');?>
+  <?php include('./inc/header_sub.php');?>
 
   <main>
     <section id="reserve">
       <h2>실습실 예약</h2>
       <!-- 예약 폼 -->
-      <form action="./php/reserve_input.php?class_no=<?= $row['class_no']; ?>" method="POST" id="reserve_form">
+      <form action="./act/reserve_input.php?class_no=<?= $row['class_no']; ?>" method="POST" id="reserve_form">
         <!-- 날짜 선택 -->
         <div class="mb-5">
           <label for="datepicker"></label>
@@ -286,9 +286,9 @@ if (isset($_SESSION['id'])) {
   </main>
 
   <!-- 공통푸터삽입 -->
-  <?php include('./php/include/footer.php');?>
+  <?php include('./inc/footer.php');?>
   <!-- 공통바텀바삽입 -->
-  <?php include('./php/include/bottom.php');?>
+  <?php include('./inc/bottom.php');?>
 
 
   <!-- 스와이퍼 js -->
@@ -370,7 +370,7 @@ if (isset($_SESSION['id'])) {
         var currentTime = (currentHour < 10 ? '0' : '') + currentHour + ':' + (currentMinute < 10 ? '0' : '') + currentMinute;
 
         $.ajax({
-          url: './php/reserve_status.php',
+          url: './act/reserve_status.php',
           method: 'GET',
           data: { class_no: classNo, selected_date: selectedDate, room_no: roomNo},
           dataType: 'json',

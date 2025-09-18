@@ -1,5 +1,5 @@
 <?php
-  include('./php/include/dbconn.php');
+  include('./inc/dbconn.php');
 
   // 세션이 이미 시작되었는지 확인
   if (session_status() === PHP_SESSION_NONE) {
@@ -23,7 +23,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡</title>
   <!-- 공통 헤드정보 삽입 -->
-  <?php include('./php/include/head.php'); ?>
+  <?php include('./inc/head.php'); ?>
   <!-- 서브서식 연결 -->
   <link rel="stylesheet" href="./css/sub.css">
   <style>
@@ -34,12 +34,12 @@
 </head>
 <body>
   <!-- 공통헤더삽입 -->
-  <?php include('./php/include/header.php');?>
+  <?php include('./inc/header.php');?>
 
   <main>
     <?php
       // 페이지네이션
-      $query1 = "SELECT COUNT(*) FROM review WHERE id = '$id'";
+      $query1 = "SELECT COUNT(*) FROM easycook_review WHERE id = '$id'";
       $result1 = mysqli_query($conn, $query1);
       $num = mysqli_fetch_array($result1)[0];
       
@@ -55,11 +55,11 @@
       $start = ($page - 1) * $list_num;
 
       // 리뷰 불러오기
-      $sql3 = "SELECT * FROM review WHERE id='$id' ORDER BY datetime DESC LIMIT $start, $list_num";
+      $sql3 = "SELECT * FROM easycook_review WHERE id='$id' ORDER BY datetime DESC LIMIT $start, $list_num";
       $result3 = mysqli_query($conn, $sql3);
 
       // 리뷰 개수를 구하는 쿼리
-      $query = "SELECT COUNT(*) AS total_review FROM review WHERE id='$id'";
+      $query = "SELECT COUNT(*) AS total_review FROM easycook_review WHERE id='$id'";
       $result = mysqli_query($conn, $query);
       $row = mysqli_fetch_assoc($result);
 
@@ -75,7 +75,7 @@
 
       <h2>내가 쓴 후기 총 <?php echo $total_review ?>개</h2>
       <p class="hov_info">후기 수정 안내 <i class="bi bi-info-circle"></i></p>
-      <div class="hover_info">수강기간이 1주일 이상 지난 후에는 리뷰를 수정할 수 없습니다.</div>
+      <div class="hover_info">수강기간이 1년 이상 지난 후에는 리뷰를 수정할 수 없습니다.</div>
       <article class="review_detail">
         <ul>
           <?php 
@@ -84,7 +84,7 @@
               $arry_img = $row3['img'];
               
               // 강의명과 종료일 가져오기
-              $sql2 = "SELECT name, end_date FROM academy_list WHERE class_no = '$class_no'";
+              $sql2 = "SELECT name, end_date FROM easycook_academy_list WHERE class_no = '$class_no'";
               $result2 = mysqli_query($conn, $sql2);
               $row2 = mysqli_fetch_array($result2);
           ?>
@@ -144,14 +144,15 @@
               <?php
                 // 강의 종료 날짜
                 $endDateObj = new DateTime($row2['end_date']);
-                $endDatePlus10 = clone $endDateObj;
-                $endDatePlus10->modify('+10 days');
-                $showEditButton = $today <= $endDatePlus10;
+                $endDatePlus = clone $endDateObj;
+                $endDatePlus->modify('+1 year');
+                $showEditButton = $today <= $endDatePlus;
               ?>
               <p class="ud_btn">
                 <?php if($showEditButton){ ?>
                 <a href="./review_edit.php?no=<?php echo $row3['no'] ?>" title="수정">수정</a>
-                <a href="./php/review_del.php?no=<?php echo $row3['no'] ?>" title="삭제">삭제</a>
+                <a href="./act/review_delete.php?no=<?php echo $row3['no'] ?>" title="삭제" 
+                  onclick="return confirm('리뷰를 삭제하시겠습니까? 삭제 후 복구할 수 없습니다.');">삭제</a>
                 <?php } ?>
               </p>
 
@@ -168,7 +169,7 @@
           ?> 
             <li class="page-item"><a href="review_list.php?page=<?php echo ($page - 1); ?>" class="page-link"><i class="bi bi-chevron-left"></i></a></li>
           <?php } else { ?>
-            <li class="page-item disabled"><a href="#" class="page-link"><i class="bi bi-chevron-left"></i></a></li>
+            <li class="page-item disabled"><a href="javascript:void(0);" class="page-link"><i class="bi bi-chevron-left"></i></a></li>
           <?php } ?>
           
           <?php // 페이지 번호 출력
@@ -182,7 +183,7 @@
             if($page < $total_page){ ?>
               <li class="page-item"><a href="review_list.php?page=<?php echo ($page + 1); ?>" class="page-link"><i class="bi bi-chevron-right"></i></a></li>
           <?php } else { ?>
-              <li class="page-item disabled"><a href="#" class="page-link"><i class="bi bi-chevron-right"></i></a></li>
+              <li class="page-item disabled"><a href="javascript:void(0);" class="page-link"><i class="bi bi-chevron-right"></i></a></li>
           <?php } ?>
         </ul>
       </nav>  
@@ -190,9 +191,9 @@
   </main>
 
   <!-- 공통푸터삽입 -->
-  <?php include('./php/include/footer.php');?>
+  <?php include('./inc/footer.php');?>
   <!-- 공통바텀바삽입 -->
-  <?php include('./php/include/bottom.php');?>
+  <?php include('./inc/bottom.php');?>
 
   <script>
     $(document).ready(function(){

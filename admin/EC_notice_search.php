@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 학원소식</title>
   <?php
-    include('header.php');      
+    include('./header.php');      
   ?>
 <main>
   <section class="m-center m-auto mb-5 class_size">
@@ -36,20 +36,20 @@
               $search = $_POST['search'];    // echo $search;
 
               //입력한 값이랑 데이터 값을 비교한다
-              $sql = "select * from ec_notice 
+              $sql = "select * from easycook_notice 
               where title like '%".$search."%' or memo like '%".$search."%'
               order by no desc;";
               $result = mysqli_query($conn, $sql);          
               while($db=mysqli_fetch_array($result)){  ?>
               <tr>
                 <td class="text-center">
-                  <a href="EC_notice_view.php?no=<?php echo $db['0'];?>" title="공지보기"><?php echo $db['0'];?></a>
+                  <a href="./EC_notice_view.php?no=<?php echo $db['0'];?>" title="공지보기"><?php echo $db['0'];?></a>
                 </td>
                 <td >
-                  <a href="EC_notice_view.php?no=<?php echo $db['0'];?>" title="공지보기"><?php echo  $db['1'];?></a>
+                  <a href="./EC_notice_view.php?no=<?php echo $db['0'];?>" title="공지보기"><?php echo  $db['1'];?></a>
                 </td>
                 <td class="text-center">
-                  <a href="EC_notice_view.php?no=<?php echo $db['0'];?>" title="공지보기"><?php echo date("Y.m.d",strtotime($db['3']));?></a>
+                  <a href="./EC_notice_view.php?no=<?php echo $db['0'];?>" title="공지보기"><?php echo date("Y.m.d",strtotime($db['3']));?></a>
                 </td>
               </tr>
               <?php     }; ?> 
@@ -57,13 +57,13 @@
           </table>
         </div>
         <div class="mt-5 mb-3" style="position:relative;">
-          <a href="EC_notice.php" title="다시 검색" class="admin_btn admin_btn_yellow position_l_b">다시 검색</a>
+          <a href="./EC_notice.php" title="다시 검색" class="admin_btn admin_btn_yellow position_l_b">다시 검색</a>
         </div>
       </div>
     </article>
   </section>
 <?php
-include('footer.php');
+include('./footer.php');
 ?>
 </body>
 </html>

@@ -9,10 +9,10 @@
   }else{
     $id = null;
   }
-  include('./php/include/dbconn.php');
+  include('./inc/dbconn.php');
   $class_no = $_GET['class_no'];
   // echo $class_no;
-  $sql = "select * from academy_list where class_no = '$class_no'";
+  $sql = "select * from easycook_academy_list where class_no = '$class_no'";
   // $sql = "select * from academy_list where class_no = '14'";
   $result = mysqli_query($conn,$sql);
   $row = mysqli_fetch_array($result);
@@ -25,13 +25,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 나의 후기</title>
   <!-- 공통 헤드정보 삽입 -->
-  <?php include('./php/include/head.php'); ?>
+  <?php include('./inc/head.php'); ?>
   <!-- 서브서식 연결 -->
   <link rel="stylesheet" href="./css/sub.css">
 </head>
 <body>
   <!-- 공통헤더삽입 -->
-  <?php include('./php/include/header_sub.php');?>
+  <?php include('./inc/header_sub.php');?>
 
   <main>
     <section class="review_write">
@@ -47,13 +47,13 @@
           <li>
             <div>
               <!-- 강의 썸네일 이미지 -->
-              <a href="#" title="상세페이지로 이동" style="pointer-events: none;">
+              <a href="javascript:void(0);" title="상세페이지로 이동" style="pointer-events: none;">
                 <img src="./uploads/class_main/<?php echo $row['thumnail_img']; ?>" alt="강의 썸네일 사진">
               </a>
               <!-- 강의 이름 -->
               <div>
                 <h2>
-                  <a href="#" title="상세페이지로 이동" style="pointer-events: none;">
+                  <a href="javascript:void(0);" title="강의 이름" style="pointer-events: none;">
                     <?php echo $row['name']; ?>
                   </a>
                 </h2>
@@ -77,7 +77,7 @@
         </ul>
       </article>
 
-      <form id="reviewForm" action="./php/review_write_input.php" method="post" enctype="multipart/form-data">
+      <form id="reviewForm" action="./act/review_write_input.php" method="post" enctype="multipart/form-data">
         <!--session로그인정보에서 id 랑 name을 넣기-->
       <input type='hidden' name='student_id' value='<?php echo $id ?>'>
       <input type='hidden' name='student_name' value='<?php echo $name ?>'>
@@ -87,7 +87,7 @@
           <h2>별점 등록</h2>
           <!--별점 기능-->
             <input type="hidden" name="code" value="<?php echo $row['code'] ?>">
-            <input type="hidden" id="starRating" name="starRating" value="0">
+            <input type="hidden" id="starRating" name="starRating" value="5">
             <input type="checkbox" id="checkbox1" class="hide" onclick="changeFormat(1)">
             <label for="checkbox1"><i class="bi bi-star-fill active star_size" ></i></label>
             <input type="checkbox" id="checkbox2" class="hide" onclick="changeFormat(2)">
@@ -103,12 +103,13 @@
         <article class="review_photo">
 
           <h2>사진 (선택)</h2>
-          <label for="file_input" class="photo"></label>
+          <label for="file_input" class="photo">
+            <i class="bi bi-camera camera"></i>
+            <p>
+              <span id="fileCount">0</span>/5
+            </p>
+          </label>
           <input type="file" id="file_input" name="files[]" class="hide" multiple accept="image/*">
-          <i class="bi bi-camera camera"></i>
-          <p>
-            <span id="fileCount">0</span>/5
-          </p>
           <div id="image_preview"></div>
           <!-- <button type="submit">파일 업로드</button> -->
         </article>
@@ -130,12 +131,16 @@
 
 
   <!-- 공통푸터삽입 -->
-  <?php include('./php/include/footer.php');?>
+  <?php include('./inc/footer.php');?>
   <!-- 공통바텀바삽입 -->
-  <?php include('./php/include/bottom.php');?>
+  <?php include('./inc/bottom.php');?>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     //별점기능
+    $(function() {
+      changeFormat(5);
+    });
+
     function changeFormat(lastIndex) {
       for (let i = 1; i <= 5; i++) {
         let $checkbox = $(`#checkbox${i}`);

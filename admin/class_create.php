@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 나의 강의실</title>
   <?php
-    include('header.php');      
+    include('./header.php');      
   ?>
 <main>
   <section class="m-center m-auto mb-5 class_size ">
@@ -24,7 +24,7 @@
   
         <?php            
           // 아이디와 일치하는 강사코드 받아오기
-          $sql_t = "select * from register where id='$s_id';";
+          $sql_t = "select * from easycook_register where id='$s_id';";
           $result_t = mysqli_query($conn, $sql_t);
           $t = mysqli_fetch_array($result_t);
 
@@ -48,12 +48,12 @@
           <div class="col-sm-10">
             <select name="code" id="code" class="form-select" required>
               <option value="">과목코드 선택</option>
-              <option value="20240710A01">20240710A01</option>
-              <option value="20240710A02">20240710A02</option>
-              <option value="20240710A03">20240710A03</option>
-              <option value="20240710A04">20240710A04</option>
-              <option value="20240710A05">20240710A05</option>
-              <option value="20240710A06">20240710A06</option>
+              <option value="20990710A01">20990710A01</option>
+              <option value="20990710A02">20990710A02</option>
+              <option value="20990710A03">20990710A03</option>
+              <option value="20990710A04">20990710A04</option>
+              <option value="20990710A05">20990710A05</option>
+              <option value="20990710A06">20990710A06</option>
             </select>
           </div>
         </div>
@@ -179,7 +179,7 @@
           </div>
           <div class="mb-4">
             <label for="detail" class="form-label">상세설명 (<span id="remainingChars" class="p01">255</span>자 남음)</label>
-            <textarea name="detail" id="detail" cols="30" rows="10" placeholder="추가 설명" class="form-control mb-1" required class="form-control" cols="50" rows="10" oninput="txtCount(this, 255)"><?php echo htmlspecialchars($q[7], ENT_QUOTES, 'UTF-8'); ?></textarea>
+            <textarea name="detail" id="detail" cols="30" rows="10" placeholder="추가 설명" class="form-control mb-1" required class="form-control" cols="50" rows="10" oninput="txtCount(this, 255)"></textarea>
           </div>
           <script>
             function txtCount(memoElement, maxlimit) {
@@ -195,7 +195,7 @@
           </script>
         </div>
         <div class="mb-3 mt-3" style="position:relative;">
-          <a href="class_1.php" title="강의목록으로" class="admin_btn admin_btn_yellow position_l_b">강의목록</a>
+          <a href="./class_1.php" title="강의목록으로" class="admin_btn admin_btn_yellow position_l_b">강의목록</a>
           <input type="reset" value="초기화" class="admin_btn admin_btn_gray position_c_b">
           <input type="submit" value="강의등록" name="input" class="admin_btn admin_btn_red position_r_b">
         </div>  
@@ -203,7 +203,7 @@
     </article>
   </section>
 <?php
-include('footer.php');
+include('./footer.php');
 ?>
 </body>
 </html>

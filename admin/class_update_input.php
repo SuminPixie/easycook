@@ -1,6 +1,6 @@
 <?php
 
-include('../include/dbconn.php');
+include('../inc/dbconn.php');
 
 // GET 파라미터 받기
 $no = $_GET['no'];
@@ -11,7 +11,7 @@ echo $no . "<br>";
 echo $class_status . "<br>";
 
 // 날짜 데이터 가져오기
-$sql_date = "SELECT * FROM academy_list WHERE class_no = '$no'";
+$sql_date = "SELECT * FROM easycook_academy_list WHERE class_no = '$no'";
 $query_date = mysqli_query($conn, $sql_date);
 
 // 결과 배열을 연관 배열로 가져오기
@@ -33,7 +33,7 @@ if ($class_status == '1주 미루기') {
 
 // 상태에 따른 업데이트 쿼리 실행
 $sql = "
-UPDATE academy_list SET 
+UPDATE easycook_academy_list SET 
     start_date = '$start_date',
     end_date = '$end_date'
 WHERE class_no = '$no'

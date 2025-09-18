@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 나의 강의실</title>
   <?php
-    include('header.php');      
+    include('./header.php');      
   ?>
 <main>
   <section class="m-center m-auto mb-5 class_size">
@@ -21,13 +21,13 @@
         <!-- 페이지네이션 만드는 php 수식 -->
           <?php
             // 아이디와 일치하는 강사코드 받아오기
-            $sql_t = "select * from register where id='$s_id';";
+            $sql_t = "select * from easycook_register where id='$s_id';";
             $result_t = mysqli_query($conn, $sql_t);
             $t = mysqli_fetch_array($result_t);
             $teacher_code = $t['teacher_code'];
 
             $today = (new DateTime())->format('Y-m-d');
-            $query = "select count(*) from academy_list where teacher_code='$teacher_code' and  (start_date <= '$today' and end_date >= '$today' )";
+            $query = "select count(*) from easycook_academy_list where teacher_code='$teacher_code' and  (start_date <= '$today' and end_date >= '$today' )";
             $result = mysqli_query($conn, $query);
             $max_Num = mysqli_fetch_array($result);
 
@@ -61,10 +61,10 @@
       <!-- 탭컨텐츠 -->
       <div id="tab_con">
         <ul>
-          <li><a href="class_1.php" title="전체">전체</a></li>
-          <li><a href="class_2.php" title="지난 강의" >지난 강의</a></li>
-          <li><a href="class_3.php" title="현재 강의" class="act">현재 강의</a></li>
-          <li><a href="class_4.php" title="보류 &#x007C; 예정">보류 &#x007C; 예정</a></li>
+          <li><a href="./class_1.php" title="전체">전체</a></li>
+          <li><a href="./class_2.php" title="지난 강의" >지난 강의</a></li>
+          <li><a href="./class_3.php" title="현재 강의" class="act">현재 강의</a></li>
+          <li><a href="./class_4.php" title="보류 &#x007C; 예정">보류 &#x007C; 예정</a></li>
         </ul>
       </div>
       
@@ -107,20 +107,20 @@
               <!-- 카테고리별 강의 보기 -->
               <?php 
 
-                $sql ="select * from academy_list where teacher_code='$teacher_code' and  (start_date <= '$today' and end_date >= '$today' ) order by class_no DESC limit $start, $list_num";
+                $sql ="select * from easycook_academy_list where teacher_code='$teacher_code' and  (start_date <= '$today' and end_date >= '$today' ) order by class_no DESC limit $start, $list_num";
                 $result = mysqli_query($conn, $sql);     
 
                 while($db=mysqli_fetch_row($result)){   ?>
                     
               <tr>
                 <td>
-                  <a href="student.php?class_no=<?php echo $db['0'];?>" title="학생페이지로"><?php echo $db['0'];?></a>
+                  <a href="./student.php?class_no=<?php echo $db['0'];?>" title="학생페이지로"><?php echo $db['0'];?></a>
                 </td>
                 <td >
-                  <a href="student.php?class_no=<?php echo $db['0'];?>" title="학생페이지로">[<?php echo $db['3'];?>][<?php echo  $db['4'];?>][<?php echo  $db['5'];?>]<?php echo  $db['1'];?>
+                  <a href="./student.php?class_no=<?php echo $db['0'];?>" title="학생페이지로">[<?php echo $db['3'];?>][<?php echo  $db['4'];?>][<?php echo  $db['5'];?>]<?php echo  $db['1'];?>
                   <?php 
                       $class_no_this =$db['0'];
-                      $sql_student = "select count(*) from `order` where class_no  =$class_no_this";
+                      $sql_student = "select count(*) from `easycook_order` where class_no  =$class_no_this";
                       $result_student = mysqli_query($conn, $sql_student);
                       $row = mysqli_fetch_array($result_student);
                       echo  "<span style=color:var(--red);'>(".$row[0]."명)</span>";
@@ -137,7 +137,7 @@
                     if ($startDate <= $today && $endDate >= $today) {
                         ?>
                         <td class="text-center">
-                            <a href="student.php?class_no=<?php echo htmlspecialchars($db['0']); ?>" title="학생페이지로">
+                            <a href="./student.php?class_no=<?php echo htmlspecialchars($db['0']); ?>" title="학생페이지로">
                                 <span class="span_title green">현재강의</span>
                             </a>
                         </td>
@@ -148,12 +148,12 @@
                         ?>
                         <td class="text-center">
                             <?php if ($daysRemaining < 7) { ?>
-                                <a href="student.php?class_no=<?php echo htmlspecialchars($db['0']); ?>" title="학생페이지로">
+                                <a href="./student.php?class_no=<?php echo htmlspecialchars($db['0']); ?>" title="학생페이지로">
                                     <span class="span_title red">임박강의</span>
                                     <span class="status_detail display_none">D - <?php echo $daysRemaining; ?></span>
                                 </a>
                             <?php } else { ?>
-                                <a href="student.php?class_no=<?php echo htmlspecialchars($db['0']); ?>" title="학생페이지로">
+                                <a href="./student.php?class_no=<?php echo htmlspecialchars($db['0']); ?>" title="학생페이지로">
                                     <span class="span_title yellow">예정강의</span>
                                 </a>
                             <?php } ?>
@@ -162,7 +162,7 @@
                     } elseif ($startDate < $today && $endDate < $today) {
                         ?>
                         <td class="text-center">
-                            <a href="student.php?class_no=<?php echo htmlspecialchars($db['0']); ?>" title="학생페이지로">
+                            <a href="./student.php?class_no=<?php echo htmlspecialchars($db['0']); ?>" title="학생페이지로">
                                 <span class="span_title darkbrown">지난강의</span>
                             </a>
                         </td>
@@ -180,24 +180,24 @@
             <?php //페이지네이션이 들어가는 곳
               //이전페이지
               if($page <= 1){ ?> 
-                <li class="page-item"><a href="class_3.php?page=1" class="page-link" title="이전페이지"><i class="bi bi-chevron-left"></i></a></li>
+                <li class="page-item"><a href="./class_3.php?page=1" class="page-link" title="이전페이지"><i class="bi bi-chevron-left"></i></a></li>
                 <?php } 
                 else{ ?> 
-                <li class="page-item"><a href="class_3.php?page=<?php echo ($page-1); ?>" class="page-link " title="이전페이지"><i class="bi bi-chevron-left"></i></a></li>
+                <li class="page-item"><a href="./class_3.php?page=<?php echo ($page-1); ?>" class="page-link " title="이전페이지"><i class="bi bi-chevron-left"></i></a></li>
                 <?php };
                 ?> 
             <?php //여기서부터 페이지 번호출력하기
               for($print_page=$s_pageNum;$print_page<=$e_pageNum;$print_page++){?>
-                <li class="page-item"><a href="class_3.php?page=<?php echo $print_page; ?>" class="page-link" title="현재페이지">
+                <li class="page-item"><a href="./class_3.php?page=<?php echo $print_page; ?>" class="page-link" title="현재페이지">
                   <?php echo $print_page ?>
                 </a></li>
               <?php }; ?>  
 
               <!-- 다음 버튼 나오는 곳 -->
               <?php if($page>=$total_page){ ?>
-                <li class="page-item"><a href="class_3.php?page=<?php echo $total_page; ?>" title="다음페이지로" class="page-link"><i class="bi bi-chevron-right"></i></a></li>
+                <li class="page-item"><a href="./class_3.php?page=<?php echo $total_page; ?>" title="다음페이지로" class="page-link"><i class="bi bi-chevron-right"></i></a></li>
               <?php }else{ ?>
-                <li class="page-item"><a href="class_3.php?page=<?php echo ($page+1); ?>" class="page-link" title="다음페이지로"><i class="bi bi-chevron-right"></i></a></li>
+                <li class="page-item"><a href="./class_3.php?page=<?php echo ($page+1); ?>" class="page-link" title="다음페이지로"><i class="bi bi-chevron-right"></i></a></li>
             <?php };    
             ?>    
           </table>
@@ -205,12 +205,12 @@
       </div>
       
       <div class="mt-5" style="position:relative;">
-        <a href="class_create.php" title="강의개설" class="admin_btn admin_btn_red position_r_b">강의개설</a>
+        <a href="./class_create.php" title="강의개설" class="admin_btn admin_btn_red position_r_b">강의개설</a>
       </div>
     </article>
   </section>
   <?php
-  include('footer.php');
+  include('./footer.php');
   ?>
 </body>
 </html>

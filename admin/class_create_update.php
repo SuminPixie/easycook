@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 나의 강의실</title>
   <?php
-    include('header.php');      
+    include('./header.php');      
   ?>
 <main>
   <section class="m-center m-auto mb-5 class_size">
@@ -21,7 +21,7 @@
       
       <form action="class_create_input.php" method="post" name="강의 개설하기" enctype="multipart/form-data">  
         <?php            
-          $sql_t = "select * from register where id='$s_id';";
+          $sql_t = "select * from easycook_register where id='$s_id';";
           $result_t = mysqli_query($conn, $sql_t);
           $t = mysqli_fetch_array($result_t);
           $teacher_code = $t['teacher_code'];
@@ -30,7 +30,7 @@
           $class_no = $_GET['no'];    
 
           //academy_list에서 데이터 받아오기
-          $sql = "select * from academy_list where class_no='$class_no';";
+          $sql = "select * from easycook_academy_list where class_no='$class_no';";
           $result = mysqli_query($conn, $sql);
           $db = mysqli_fetch_array($result);
         ?>
@@ -53,12 +53,12 @@
           <div class="col-sm-10">
             <select name="code" id="code" class="form-select" required>
               <option value="" disabled>선택하세요</option> <!-- 플레이스홀더 옵션 추가 -->
-              <option value="20240710A01" <?php echo ($db[2] == '20240710A01') ? 'selected' : ''; ?>>20240710A01</option>
-              <option value="20240710A02" <?php echo ($db[2] == '20240710A02') ? 'selected' : ''; ?>>20240710A02</option>
-              <option value="20240710A03" <?php echo ($db[2] == '20240710A03') ? 'selected' : ''; ?>>20240710A03</option>
-              <option value="20240710A04" <?php echo ($db[2] == '20240710A04') ? 'selected' : ''; ?>>20240710A04</option>
-              <option value="20240710A05" <?php echo ($db[2] == '20240710A05') ? 'selected' : ''; ?>>20240710A05</option>
-              <option value="20240710A06" <?php echo ($db[2] == '20240710A06') ? 'selected' : ''; ?>>20240710A06</option>
+              <option value="20990710A01" <?php echo ($db[2] == '20990710A01') ? 'selected' : ''; ?>>20990710A01</option>
+              <option value="20990710A02" <?php echo ($db[2] == '20990710A02') ? 'selected' : ''; ?>>20990710A02</option>
+              <option value="20990710A03" <?php echo ($db[2] == '20990710A03') ? 'selected' : ''; ?>>20990710A03</option>
+              <option value="20990710A04" <?php echo ($db[2] == '20990710A04') ? 'selected' : ''; ?>>20990710A04</option>
+              <option value="20990710A05" <?php echo ($db[2] == '20990710A05') ? 'selected' : ''; ?>>20990710A05</option>
+              <option value="20990710A06" <?php echo ($db[2] == '20990710A06') ? 'selected' : ''; ?>>20990710A06</option>
             </select>
           </div>
         </div>
@@ -188,7 +188,7 @@
           </div>
         </div>
         <div class="mb-3 mt-3" style="position:relative;">
-          <a href="class_1.php" title="강의목록으로" class="admin_btn admin_btn_yellow position_l_b">강의목록</a>
+          <a href="./class_1.php" title="강의목록으로" class="admin_btn admin_btn_yellow position_l_b">강의목록</a>
           <input type="reset"  value="초기화"        class="admin_btn admin_btn_gray position_c_b">
           <input type="submit" value="강의수정" name="update" class="admin_btn admin_btn_red position_r_b">
         </div>  
@@ -196,7 +196,7 @@
     </article>
 </section>
 <?php
-include('footer.php');
+include('./footer.php');
 ?>
 </body>
 </html>

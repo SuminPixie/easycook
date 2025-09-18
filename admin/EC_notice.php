@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 학원소식</title>
   <?php
-    include('header.php');      
+    include('./header.php');      
   ?>
 <main>
   <section class="m-center m-auto mb-5 class_size">
@@ -19,7 +19,7 @@
 
     <!-- 페이지네이션 만드는 php 수식 -->
       <?php
-      $query = "select count(*) from ec_notice order by no desc";
+      $query = "select count(*) from easycook_notice order by no desc";
       $result = mysqli_query($conn, $query);
       $max_Num = mysqli_fetch_array($result);
 
@@ -83,17 +83,17 @@
               <tbody>
                 <!-- 전체강의 보기 -->
                 <?php 
-                $sql = "select * from ec_notice order by no desc limit $start, $list_num;";
+                $sql = "select * from easycook_notice order by no desc limit $start, $list_num;";
                 $result2 = mysqli_query($conn, $sql);              
                 while($db=mysqli_fetch_array($result2)){   ?>
                 <tr>
                   <td class="text-center">
-                    <a href="EC_notice_view.php?no=<?php echo $db['0'];?>" title="<?php echo $db['1'];?>"><?php echo $db['0'];?></a>
+                    <a href="./EC_notice_view.php?no=<?php echo $db['0'];?>" title="<?php echo $db['1'];?>"><?php echo $db['0'];?></a>
                   </td>
                   <td >
-                    <a href="EC_notice_view.php?no=<?php echo $db['0'];?>" title="<?php echo $db['1'];?>"><?php echo  $db['1'];?></a>
+                    <a href="./EC_notice_view.php?no=<?php echo $db['0'];?>" title="<?php echo $db['1'];?>"><?php echo  $db['1'];?></a>
                   </td>
-                  <td class="text-center display_none"><a href="EC_notice_view.php?no=<?php echo $db['0'];?>" title="<?php echo $db['1'];?>"><?php echo date("Y.m.d",strtotime($db['3']));?></a></td>
+                  <td class="./text-center display_none"><a href="./EC_notice_view.php?no=<?php echo $db['0'];?>" title="<?php echo $db['1'];?>"><?php echo date("Y.m.d",strtotime($db['3']));?></a></td>
                 </tr>
                 <?php     }; ?> 
               </tbody>
@@ -106,23 +106,23 @@
               <?php //페이지네이션이 들어가는 곳
                 //이전페이지
                 if($page <= 1){ ?> 
-                  <li class="page-item"><a href="EC_notice.php?page=1" title ="이전페이지" class="page-link"><i class="bi bi-chevron-left"></i></a></li>
+                  <li class="page-item"><a href="./EC_notice.php?page=1" title ="이전페이지" class="page-link"><i class="bi bi-chevron-left"></i></a></li>
                   <?php } 
                   else{ ?> 
-                  <li class="page-item"><a href="EC_notice.php?page=<?php echo ($page-1); ?>" title ="이전페이지" class="page-link "><i class="bi bi-chevron-left"></i></a></li>
+                  <li class="page-item"><a href="./EC_notice.php?page=<?php echo ($page-1); ?>" title ="이전페이지" class="page-link "><i class="bi bi-chevron-left"></i></a></li>
                   <?php };
                   ?> 
               <?php //여기서부터 페이지 번호출력하기
                 for($print_page=$s_pageNum;$print_page<=$e_pageNum;$print_page++){?>
-                  <li class="page-item"><a href="EC_notice.php?page=<?php echo $print_page; ?>" title ="현재페이지" class="page-link">
+                  <li class="page-item"><a href="./EC_notice.php?page=<?php echo $print_page; ?>" title ="현재페이지" class="page-link">
                     <?php echo $print_page ?>
                   </a></li>
                 <?php }; ?>  
                 <!-- 다음 버튼 나오는 곳 -->
                 <?php if($page>=$total_page){ ?>
-                  <li class="page-item"><a href="EC_notice.php?page=<?php echo $total_page; ?>" title="다음페이지" class="page-link"><i class="bi bi-chevron-right"></i></a></li>
+                  <li class="page-item"><a href="./EC_notice.php?page=<?php echo $total_page; ?>" title="다음페이지" class="page-link"><i class="bi bi-chevron-right"></i></a></li>
                 <?php }else{ ?>
-                  <li class="page-item"><a href="EC_notice.php?page=<?php echo ($page+1); ?>" title="다음페이지" class="page-link " ><i class="bi bi-chevron-right"></i></a></li>
+                  <li class="page-item"><a href="./EC_notice.php?page=<?php echo ($page+1); ?>" title="다음페이지" class="page-link " ><i class="bi bi-chevron-right"></i></a></li>
               <?php };     ?>    
               </ul>
             </nav>
@@ -141,7 +141,7 @@
     </div>
   </section>
   <?php
-  include('footer.php');
+  include('./footer.php');
   ?>
 </body>
 </html>

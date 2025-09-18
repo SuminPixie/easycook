@@ -1,15 +1,15 @@
 <?php
-  include('./php/include/dbconn.php');
+  include('./inc/dbconn.php');
 
   $no = $_GET['no'];
 
-  $sql = "SELECT * FROM review WHERE `no`='$no'";
+  $sql = "SELECT * FROM easycook_review WHERE `no`='$no'";
   $result = mysqli_query($conn,$sql);
   $row = mysqli_fetch_array($result);
 
   $class_no = $row['class_no'];
   
-  $sql2 = "SELECT * FROM academy_list WHERE class_no ='$class_no'";
+  $sql2 = "SELECT * FROM easycook_academy_list WHERE class_no ='$class_no'";
   $result2 = mysqli_query($conn,$sql2);
   $row2 = mysqli_fetch_array($result2);
 
@@ -22,13 +22,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 나의 후기</title>
     <!-- 공통 헤드정보 삽입 -->
-    <?php include('./php/include/head.php'); ?>
+    <?php include('./inc/head.php'); ?>
   <!-- 서브서식 연결 -->
   <link rel="stylesheet" href="./css/sub.css">
 </head>
 <body>
   <!-- 공통헤더삽입 -->
-  <?php include('./php/include/header_sub.php');?>
+  <?php include('./inc/header_sub.php');?>
 
   <main>
   <section class="review_write">
@@ -74,7 +74,7 @@
         </ul>
       </article>
 
-      <form id="reviewForm" action="./php/review_edit_input.php" method="post" enctype="multipart/form-data">
+      <form id="reviewForm" action="./act/review_edit_input.php" method="post" enctype="multipart/form-data">
           <!--session로그인정보에서 id 랑 name을 넣기-->
         <input type='hidden' name='no' value='<?php echo $no ?>'>
         <input type='hidden' name='student_id' value='<?php echo $id ?>'>
@@ -141,7 +141,7 @@
           <!-- 등록 버튼 -->
           <p class="btn-box-l">
             <input type="submit" id="submitBtn" value="수정" class="btn-l">
-            <input type="button"  value="취소" class="btn-l">
+            <a href="./review_list.php" class="btn-l">취소</a>
           </p>
       </form>
 
@@ -149,9 +149,9 @@
   </main>
 
   <!-- 공통푸터삽입 -->
-  <?php include('./php/include/footer.php');?>
+  <?php include('./inc/footer.php');?>
   <!-- 공통바텀바삽입 -->
-  <?php include('./php/include/bottom.php');?>
+  <?php include('./inc/bottom.php');?>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <script>

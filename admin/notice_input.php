@@ -2,7 +2,7 @@
 
 <?php 
 
-include('../include/dbconn.php');
+include('../inc/dbconn.php');
 
 $no = $_POST['no'];
 $delete = $_POST['delete'];
@@ -18,7 +18,7 @@ if(isset($no)){
   if(isset($delete)){
     // echo $delete;
     // echo $no;
-    $sql = "delete from board where no = '$no'";
+    $sql = "delete from easycook_board where no = '$no'";
     $result = mysqli_query($conn, $sql);    
     if($result){
       echo "<script>confirm('공지를 삭제하였습니다.')</script>";
@@ -29,7 +29,7 @@ if(isset($no)){
     }
   }else{
     //echo "수정";
-    $sql = "update board 
+    $sql = "update easycook_board 
     set 
     class_no = '$class_no',
     title = '$notice_title',
@@ -50,7 +50,7 @@ if(isset($no)){
 }else{
   echo "작성";
   //board 공지사항에서 데이터 받아오기
-  $sql = "select * from board where no='$no';";
+  $sql = "select * from easycook_board where no='$no';";
   $result = mysqli_query($conn, $sql);
   $db = mysqli_fetch_array($result);  
   
@@ -69,26 +69,26 @@ if(isset($no)){
   echo "<br>제목".$title;
   echo "<br>작성일".$datetime;
   
-  $sql = "select * from board where no='$no'";
+  $sql = "select * from easycook_board where no='$no'";
   $result = mysqli_query($conn, $sql);
   $q=mysqli_fetch_row($result);
   
   
   $sql = "
-  insert into board 
+  insert into easycook_board 
   set 
   class_no= '$class_no', 
   title = '$title', 
   memo ='$memo', 
   id ='$id', 
-  datetime='2024-10-10';
+  datetime='$datetime';
   ";
   
   $result = mysqli_query($conn, $sql);
   
   if($result){
     echo "<script>alert('공지 작성 되었습니다.')</script>";
-    echo "<script>history.go(-1);</script>";
+    echo "<script>history.go(-2);</script>";
   }else{
     echo "<script>alert(등록 실패 : ". mysqli_error($conn).")</script>";
     mysqli_close($conn);

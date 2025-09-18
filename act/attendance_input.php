@@ -2,7 +2,7 @@
   session_start(); // 세션 시작
 
   // 데이터베이스 연결
-  include('./include/dbconn.php');
+  include('../inc/dbconn.php');
   // 세션 ID 확인
   if (!isset($_SESSION['id'])) {
     echo "<script>
@@ -17,14 +17,14 @@
   $datetime = date('Y-m-d H:i:s', time());
 
   // register 테이블에서 세션id의 name과 teacher_code 가져오기
-  $sql = "SELECT name, teacher_code FROM register WHERE id='$id'";
+  $sql = "SELECT name, teacher_code FROM easycook_register WHERE id='$id'";
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($result);
 
   $name = $row['name'];
 
   // academy_list 테이블에서 class_no에 해당하는 teacher_code 가져오기
-  $sql = "SELECT teacher_code FROM academy_list WHERE class_no='$class_no'";
+  $sql = "SELECT teacher_code FROM easycook_academy_list WHERE class_no='$class_no'";
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($result);
 
@@ -33,7 +33,7 @@
   $today_date = date('Y-m-d', time()); // 오늘 날짜
 
   // 오늘 출석 기록이 있는지 확인
-  $sql = "SELECT * FROM attendance WHERE id='$id' AND class_no='$class_no' AND DATE(datetime)='$today_date'";
+  $sql = "SELECT * FROM easycook_attendance WHERE id='$id' AND class_no='$class_no' AND DATE(datetime)='$today_date'";
   $result = mysqli_query($conn, $sql);
 
 
@@ -42,7 +42,7 @@ if (mysqli_num_rows($result) > 0) {
     echo json_encode(['status' => 'done', 'message' => '이미 출석을 완료하셨습니다.']);
 } else {
     // 데이터 삽입 쿼리 작성
-    $sql = "INSERT INTO attendance (class_no, id, name, teacher_code, datetime) 
+    $sql = "INSERT INTO easycook_attendance (class_no, id, name, teacher_code, datetime) 
             VALUES ('$class_no', '$id', '$name', '$teacher_code', '$datetime')";
 
     // 쿼리 실행

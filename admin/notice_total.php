@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 공지관리</title>
-  <?php  include('header.php');  ?>
+  <?php  include('./header.php');  ?>
   <main>
     <section class="m-center m-auto mb-5 class_size">
       <!-- 부스러기 -->
@@ -46,13 +46,13 @@
               <!-- 페이지네이션 시작 -->
               <?php
                 // 아이디와 일치하는 강사코드 받아오기
-                $sql_t = "SELECT * FROM register WHERE id='$s_id';";
+                $sql_t = "SELECT * FROM easycook_register WHERE id='$s_id';";
                 $result_t = mysqli_query($conn, $sql_t);
                 $t = mysqli_fetch_array($result_t);
                 $teacher_code = $t['teacher_code'];  //echo $teacher_code;
     
                 // count
-                $query = "select count(*) from board WHERE id='$s_id'";
+                $query = "select count(*) from easycook_board WHERE id='$s_id'";
                 $result_c = mysqli_query($conn, $query);
                 $max_Num = mysqli_fetch_array($result_c); //echo "카운트".$max_Num[0]; 
     
@@ -84,19 +84,19 @@
               ?>
               <?php
                 // 전체 공지를 가져와라
-                $sql_b = "select * from board where id='$s_id' order by no desc limit $start, $list_num;";
+                $sql_b = "select * from easycook_board where id='$s_id' order by no desc limit $start, $list_num;";
                 $result_b = mysqli_query($conn, $sql_b);
                 while($db_b = mysqli_fetch_array($result_b)){
                   // 아카데미 이름 가져오기
-                  $sql_n = "select * from academy_list where class_no='$db_b[1]'";
+                  $sql_n = "select * from easycook_academy_list where class_no='$db_b[1]'";
                   $result_n = mysqli_query($conn, $sql_n);
                   $db_n = mysqli_fetch_array($result_n); //                echo $db_n[1];
                   echo "<tr>";
-                    echo "<td class='text-center'><a href='notice_list.php?class_no=".$db_b[1]."' title='강의실 바로가기'>".$db_b[0]."</a></td>";
-                    echo "<td style='position:relative;'><a href='notice_list.php?class_no=".$db_b[1]."' title='강의실 바로가기'>
+                    echo "<td class='text-center'><a href='./notice_view.php?no=".$db_b[0]."' title='공지사항 수정'>".$db_b[0]."</a></td>";
+                    echo "<td style='position:relative;'><a href='./notice_view.php?no=".$db_b[0]."' title='공지사항 수정'>
                             <span>".$db_b[2]."</span>
                             <span class='span_subtitle'>".$db_n[1]."</span></a></td>";
-                    echo "<td  class='text-center display_none'><a href='notice_list.php?class_no=".$db_b[1]."' title='강의실 바로가기'>".date("y-m-d",strtotime($db_b[5]))."</a></td>";
+                    echo "<td  class='text-center display_none'><a href='./notice_view.php?no=".$db_b[0]."' title='공지사항 수정'>".date("y-m-d",strtotime($db_b[5]))."</a></td>";
                   echo "</tr>";
                 };      ?>  
             </tbody>
@@ -108,22 +108,22 @@
               <?php //페이지네이션이 들어가는 곳
               //이전페이지
               if($page <= 1){ ?> 
-                <li class="page-item"><a href="notice_total.php?page=<?php echo ($page-1); ?>" title="이전페이지로" class="page-link"><i class="bi bi-chevron-left"></i></a></li>
+                <li class="page-item"><a href="./notice_total.php?page=<?php echo ($page-1); ?>" title="이전페이지로" class="page-link"><i class="bi bi-chevron-left"></i></a></li>
                 <?php } 
                 else{ ?> 
-                <li class="page-item"><a href="notice_total.php?page=<?php echo ($page-1); ?>" title="이전페이지로" class="page-link "><i class="bi bi-chevron-left"></i></a></li>
+                <li class="page-item"><a href="./notice_total.php?page=<?php echo ($page-1); ?>" title="이전페이지로" class="page-link "><i class="bi bi-chevron-left"></i></a></li>
                 <?php }; ?> 
                 <?php //여기서부터 페이지 번호출력하기
               for($print_page=$s_pageNum;$print_page<=$e_pageNum;$print_page++){?>
-                <li class="page-item"><a href="notice_total.php?page=<?php echo $print_page; ?>" title="현재페이지로" class="page-link">
+                <li class="page-item"><a href="./notice_total.php?page=<?php echo $print_page; ?>" title="현재페이지로" class="page-link">
                   <?php echo $print_page ?>
                 </a></li>
                 <?php }; ?>  
                 <!-- 다음 버튼 나오는 곳 -->
                 <?php if($page>=$total_page){ ?>
-                  <li class="page-item"><a href="notice_total.php?page=<?php echo $total_page; ?>" title="다음페이지로" class="page-link"><i class="bi bi-chevron-right"></i></a></li>
+                  <li class="page-item"><a href="./notice_total.php?page=<?php echo $total_page; ?>" title="다음페이지로" class="page-link"><i class="bi bi-chevron-right"></i></a></li>
                 <?php }else{ ?>
-                  <li class="page-item"><a href="notice_total.php?page=<?php echo ($page+1); ?>" title="다음페이지로" class="page-link ">
+                  <li class="page-item"><a href="./notice_total.php?page=<?php echo ($page+1); ?>" title="다음페이지로" class="page-link ">
                     <i class="bi bi-chevron-right"></i></a>
                   </li>
                 <?php };   ?>    
@@ -131,15 +131,15 @@
           </nav>  
         
         <div class="mt-5 mb-5" style="position:relative;">
-          <a href="index.php" title="메인으로" class="admin_btn admin_btn_yellow position_l_b">메인으로</a>
-          <a href="notice_select.php" title="공지등록하기" class="admin_btn admin_btn_red position_r_b">공지등록</a>
+          <a href="./index.php" title="메인으로" class="admin_btn admin_btn_yellow position_l_b">메인으로</a>
+          <a href="./notice_select.php" title="공지등록하기" class="admin_btn admin_btn_red position_r_b">공지등록</a>
         </div>   
 
       </div>
     </form>
   </section>
   <?php
-  include('footer.php');
+  include('./footer.php');
   ?>
 </body>
 </html>

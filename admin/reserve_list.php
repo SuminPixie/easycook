@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 실습실</title>
-  <?php include('header.php');   ?>
+  <?php include('./header.php');   ?>
   <main>
     <section class="m-center m-auto mb-5 class_size">
       <!-- 부스러기 -->
@@ -57,11 +57,11 @@
         <div id="txt1">
           <?php
             // 101호 예약 현황
-            $sql = "SELECT start, COUNT(*) FROM room WHERE room_date = '$todayTime' AND room = '101' GROUP BY start ORDER BY start";
+            $sql = "SELECT start, COUNT(*) FROM easycook_room WHERE room_date = '$todayTime' AND room = '101' GROUP BY start ORDER BY start";
             $result = mysqli_query($conn, $sql);
 
             // 102호 예약 현황
-            $sql2 = "SELECT start, COUNT(*) FROM room WHERE room_date = '$todayTime' AND room = '102' GROUP BY start ORDER BY start";
+            $sql2 = "SELECT start, COUNT(*) FROM easycook_room WHERE room_date = '$todayTime' AND room = '102' GROUP BY start ORDER BY start";
             $result2 = mysqli_query($conn, $sql2);
           ?>
 
@@ -88,7 +88,7 @@
                     <div class="reserve_p">
                       <ul>
                         <?php
-                        $sql3 = "SELECT * FROM room WHERE `start` = '$db[0]' and room_date = '$todayTime' AND room = '101' ORDER BY start";
+                        $sql3 = "SELECT * FROM easycook_room WHERE `start` = '$db[0]' and room_date = '$todayTime' AND room = '101' ORDER BY start";
                         $result3 = mysqli_query($conn, $sql3);
                         while($db3 = mysqli_fetch_array($result3)){
                           ?>
@@ -117,15 +117,28 @@
                   <div class="reserve_time">
                     <input type="checkbox" id="time<?php echo $db2[0]*1+9 ?>">
                     <label for="time<?php echo $db2[0]*1+9 ?>">
+                      <?php
+                      $raw = $db2[0] ?? ''; 
+                      if (is_numeric($raw)) {
+                        $h = (int)$raw;
+                      } else {
+                        $ts = strtotime($raw);
+                        $h = ($ts !== false) ? (int)date('H', $ts) : 0;
+                      }
+
+                      $start = sprintf('%02d:00', $h);
+                      $end   = sprintf('%02d:00', ($h + 1) % 24);
+                      $cnt   = (int)($db2[1] ?? 0);
+                      ?>
                       <ul>
-                        <li><?php echo $db2[0]*1 ?>:00 ~ <?php echo $db2[0] + 1 ?>:00</li>
-                        <li><span style="color:var(--red); font-weight:bold;"><?php echo $db2[1] ?></span> / 8</li>
+                        <li><?= $start ?> ~ <?= $end ?></li>
+                        <li><span style="color:var(--red); font-weight:bold;"><?= $cnt ?></span> / 8</li>
                       </ul>
                     </label>
                     <div class="reserve_p">
                       <ul>
                       <?php
-                        $sql3 = "SELECT * FROM room WHERE `start` = '$db2[0]' and room_date = '$todayTime' AND room = '102' ORDER BY start";
+                        $sql3 = "SELECT * FROM easycook_room WHERE `start` = '$db2[0]' and room_date = '$todayTime' AND room = '102' ORDER BY start";
                         $result3 = mysqli_query($conn, $sql3);
                         while($db3 = mysqli_fetch_array($result3)){?>
                         <li><?php echo $db3[7]." (".$db3[6].")";?></li>                
@@ -144,7 +157,7 @@
       </article>
   </section>
   <?php
-  include('footer.php');
+  include('./footer.php');
   ?>
 </body>
 </html>

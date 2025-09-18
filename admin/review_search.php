@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡 | 수강생 후기</title>
-  <?php include('header.php');   ?>
+  <?php include('./header.php');   ?>
 <main>
   <section class="m-center m-auto mb-5 class_size">
     <!-- 부스러기 -->
@@ -19,7 +19,7 @@
       $s_id = $_SESSION['id'];   
   
       //나의 강사코드를 찾아라
-      $query = "select * from register where id='$s_id'";
+      $query = "select * from easycook_register where id='$s_id'";
       $result = mysqli_query($conn, $query);
       $class = mysqli_fetch_array($result);// echo '강사코드'.$class[7];
 
@@ -27,7 +27,7 @@
       $search = $_POST['search'];    // echo $search;
 
       //입력한 값이랑 데이터 값을 비교한다
-      $sql = "select * from board where 
+      $sql = "select * from easycook_board where 
       (title like '%".$search."%' or memo like '%".$search."%')
       and id='$s_id' order by title desc;";
       $result = mysqli_query($conn, $sql);  
@@ -49,7 +49,7 @@
           $search = $_POST['search'];    // echo $search;
 
           //입력한 값이랑 데이터 값을 비교한다
-          $sql = "select * from review where 
+          $sql = "select * from easycook_review where 
           review like '%".$search."%' or star like '%".$search."%' 
           order by no desc limit 50;";
           $result = mysqli_query($conn, $sql);  
@@ -58,7 +58,7 @@
           $row_count = 0; // 번호를 매기기 위한 변수 초기화
           while ($r = mysqli_fetch_array($result)) {
               //academy_list에서 데이터 받아오기
-              $sql2 = "select * from academy_list where class_no='$r[1]' and teacher_code='$class[7]';";
+              $sql2 = "select * from easycook_academy_list where class_no='$r[1]' and teacher_code='$class[7]';";
               $result2 = mysqli_query($conn, $sql2);
               $db = mysqli_fetch_array($result2);
   
@@ -92,10 +92,10 @@
         </tbody>
       </table>
       <div class="mt-5 mb-3" style="position:relative;">
-        <a href="review_list.php" title="다시 검색하기" class="admin_btn admin_btn_yellow position_l_b">다시 검색</a>
+        <a href="./review_list.php" title="다시 검색하기" class="admin_btn admin_btn_yellow position_l_b">다시 검색</a>
       </div>
     </article>
   </section>
-<?php include('footer.php'); ?>
+<?php include('./footer.php'); ?>
 </body>
 </html>

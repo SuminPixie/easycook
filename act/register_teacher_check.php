@@ -2,12 +2,12 @@
   session_start();  // 세션 시작
   
   // 데이터베이스 연결
-  include('./include/dbconn.php');
+  include('../inc/dbconn.php');
 
   $teacher_code = trim($_POST['teacher_code']);
 
   // 데이터베이스에서 검색
-  $sql = "SELECT * FROM teacher_list WHERE teacher_code = '$teacher_code'";
+  $sql = "SELECT * FROM easycook_teacher_list WHERE teacher_code = '$teacher_code'";
   $result = mysqli_query($conn, $sql);
 
   if ($result->num_rows == 0) {

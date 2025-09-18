@@ -3,7 +3,7 @@
   if (session_status() === PHP_SESSION_NONE) {
     session_start();
   }
-  include('./php/include/dbconn.php');
+  include('./inc/dbconn.php');
 
   //사용자가 로그인한 경우 나의 강의정보 보여줌
   if (isset($_SESSION['id'])){
@@ -11,10 +11,11 @@
 
     $class_no = $_GET['class_no'];
 
-    $sql = "select * from academy_list where class_no = '$class_no'";
+    $sql = "select * from easycook_academy_list where class_no = '$class_no'";
     $result = mysqli_query($conn,$sql);
     $row = mysqli_fetch_array($result);
     $class_no2 = $row['class_no'];
+
 
     // 출석 현황 조회
     $sql_attendance = "
@@ -31,9 +32,9 @@
           ELSE '결석' -- 수업 종료 후 결석
         END AS status
     FROM
-        attendance a
+        easycook_attendance a
     JOIN
-        academy_list al ON a.class_no = al.class_no
+        easycook_academy_list al ON a.class_no = al.class_no
     WHERE
         a.id = '$id'
     AND
@@ -80,7 +81,7 @@
   }
 
     // 페이지네이션
-    $query = "select count(*) from board where class_no='$class_no'";
+    $query = "select count(*) from easycook_board where class_no='$class_no'";
     $result = mysqli_query($conn, $query);
     $max_Num = mysqli_fetch_array($result);
 
@@ -118,7 +119,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>나의 강의정보</title>
   <!-- 공통 헤드정보 삽입 -->
-  <?php include('./php/include/head.php'); ?>
+  <?php include('./inc/head.php'); ?>
 
   <!-- Chart.js CDN 원형그래프 -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -271,11 +272,31 @@
       border: none;
     }
 
+
+    /* 강의 정보 스타일 */
+    .info-list {
+      margin: 0;
+      padding: 0;
+    }
+    .info-list div {
+      display: flex;
+      margin-bottom: 6px;
+    }
+    .info-list dt {
+      font-weight: 600;
+      width: 80px;
+      color:var(--black);
+    }
+    .info-list dd {
+      margin: 0;
+      flex: 1;
+      color: #555;
+    }
   </style>
 </head>
 <body>
   <!-- 공통헤더삽입 -->
-  <?php include('./php/include/header_sub.php');?>
+  <?php include('./inc/header_sub.php');?>
 
   <main>
     <section class="container mt-5">
@@ -287,13 +308,51 @@
             <p class="card-title m_top"><strong><?php echo $row['name']; ?></strong></p>
             <hr>
             <p class="card-text">
-              일정 : <?php echo $row['start_date']; ?> ~ <?php echo $row['end_date']; ?><br>
-              차수 : <?php echo $row['nth']; ?>차<br>
-              난이도 : <?php echo $row['grade']; ?><br>
-              장소 : <?php echo $row['place']; ?><br>
-              강사명 : <?php echo $row['teacher']; ?><br>
-              연락처 : 02-1234-1234
+              <dl class="info-list">
+                <div>
+                  <dt>일정</dt>
+                  <dd><?php echo $row['start_date']; ?> ~ <?php echo $row['end_date']; ?></dd>
+                </div>
+                <div>
+                  <dt>차수</dt>
+                  <dd><?php echo $row['nth']; ?>차</dd>
+                </div>
+                <div>
+                  <dt>강의시간</dt>
+                  <dd><?php echo date("H:i", strtotime($row['start_time'])); ?> ~ <?php echo date("H:i", strtotime($row['end_time'])); ?></dd>
+                </div>
+                <div>
+                  <dt>난이도</dt>
+                  <dd><?php echo $row['grade']; ?></dd>
+                </div>
+                <div>
+                  <dt>장소</dt>
+                  <dd><?php echo $row['place']; ?></dd>
+                </div>
+                <div>
+                  <dt>강사명</dt>
+                  <dd><?php echo $row['teacher']; ?></dd>
+                </div>
+                <div>
+                  <dt>연락처</dt>
+                    <?php
+                    $rawPhone = $row['phone']; // 예: 1012345678
+                    $digits   = preg_replace('/\D/', '', $rawPhone); // 숫자만 추출
+                    // 앞자리가 10으로 시작하면 0 붙여주기
+                    if (strlen($digits) === 10 && substr($digits,0,2) === '10') {
+                        $digits = '0' . $digits;
+                    }
+                    if (preg_match('/^(\d{3})(\d{3,4})(\d{4})$/', $digits, $m)) {
+                        $formatted = $m[1] . '-' . $m[2] . '-' . $m[3];
+                    } else {
+                        $formatted = $digits;
+                    }
+                    ?>
+                  <dd><?php echo $formatted; ?></dd>
+                </div>
+              </dl>
             </p>
+
           </div>
         </div>
     </section>
@@ -303,7 +362,7 @@
         <!--php문 반복문 쓰기 for(row2=mysqli 이거 ) 공지사항 불러오기-->
         <ul class="s_board">
           <?php  
-            $s_board = "select * from board where class_no = '$class_no2' order by no DESC limit $start, $list_num";
+            $s_board = "select * from easycook_board where class_no = '$class_no2' order by no DESC limit $start, $list_num";
             $s_result = mysqli_query($conn, $s_board);
             if(mysqli_num_rows($s_result) > 0){
             while($s_row = mysqli_fetch_array($s_result)){
@@ -400,17 +459,17 @@
   </main>
 
   <!-- 공통푸터삽입 -->
-  <?php include('./php/include/footer.php');?>
+  <?php include('./inc/footer.php');?>
 
   <!-- 공통 바텀바삽입 -->
-  <?php include('./php/include/bottom.php');?>
+  <?php include('./inc/bottom.php');?>
 
 
   <script>
     //찜목록에서 삭제하는 기능
     function removeCart(classNo) {
       $.ajax({
-        url: './php/cart_toggle.php',
+        url: './act/cart_toggle.php',
         type: 'POST',
         data: {
           class_no: classNo,

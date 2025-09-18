@@ -1,5 +1,5 @@
 <?php
-  include('./php/include/dbconn.php');
+  include('../inc/dbconn.php');
 
     // 세션이 이미 시작되었는지 확인
     if (session_status() === PHP_SESSION_NONE) {
@@ -13,7 +13,7 @@
     }
 
     // question count
-    $query = "select count(*) from question WHERE question_id='$id'";
+    $query = "select count(*) from easycook_question WHERE question_id='$id'";
     $result = mysqli_query($conn, $query);
     $max_Num = mysqli_fetch_array($result);
 
@@ -44,19 +44,19 @@
     $cnt = $start + 1;
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이지쿡</title>
     <!-- 공통 헤드정보 삽입 -->
-    <?php include('./php/include/head.php'); ?>
+    <?php include('../inc/head.php'); ?>
     <!-- 서식 연결 -->
     <link rel="stylesheet" href="./css/sub.css">
 </head>
 <body>
   <!-- 공통헤더삽입 -->
-  <?php include('./php/include/header.php');?>
+  <?php include('../inc/header.php');?>
 
   <!-- 나의 문의 내역 -->
   <main>
@@ -83,7 +83,7 @@
           <!-- 전체강의 보기 -->
           <?php 
             // question 불러오는 곳
-            $sql = "select count(*) as total_rows from question where question_id='$id';";
+            $sql = "select count(*) as total_rows from easycook_question where question_id='$id';";
             $result_count = mysqli_query($conn, $sql);
             $row_count = mysqli_fetch_assoc($result_count)['total_rows'];
 
@@ -91,12 +91,12 @@
             $row_number = $row_count - $start;
 
             // 현재 페이지의 행 가져오기
-            $sql = "select * from question where question_id='$id' order by no DESC limit $start, $list_num;";
+            $sql = "select * from easycook_question where question_id='$id' order by no DESC limit $start, $list_num;";
             $result = mysqli_query($conn, $sql);
             
             while($q=mysqli_fetch_row($result)){
               // 클래스명
-              $query = "select * from academy_list where class_no='$q[1]'";
+              $query = "select * from easycook_academy_list where class_no='$q[1]'";
               $result2 = mysqli_query($conn, $query);
               $class = mysqli_fetch_array($result2);
 
@@ -179,7 +179,7 @@
   </main>
 
   <!-- 공통바텀바삽입 -->
-  <?php include('./php/include/bottom.php');?>
+  <?php include('../inc/bottom.php');?>
 
 </body>
 </html>

@@ -47,7 +47,7 @@
     // 강사코드가 있다면 강사페이지로 이동한다.
     if (!empty($_SESSION['teacher_code'])) {
         echo "<script>alert('강사페이지로 이동합니다.');</script>";
-        echo "<script>location.replace('./admin/index.php');</script>";
+        echo "<script>location.replace('../admin/index.php');</script>";
     } else { // 강사코드가 없다면 메인페이지로 이동한다.
         echo "<script>alert('로그인 성공');</script>";
         echo "<script>location.replace('../index.php');</script>";
