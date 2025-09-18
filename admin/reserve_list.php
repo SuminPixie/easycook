@@ -81,7 +81,8 @@
                     <input type="checkbox" id="time<?php echo $db[0]*1 ?>">
                     <label for="time<?php echo $db[0]*1 ?>">
                       <ul>
-                        <li><?php echo $db[0]*1 ?>:00 ~ <?php echo $db[0] + 1 ?>:00</li>
+                        <?php $h = (int)(is_string($db[0]) ? explode(':', $db[0])[0] : $db[0]); ?>
+                        <li><?php echo sprintf('%02d:00', $h); ?> ~ <?php echo sprintf('%02d:00', ($h + 1) % 24); ?></li>
                         <li><span style="color:var(--red); font-weight:bold;"><?php echo $db[1] ?></span> / 8</li>
                       </ul>
                     </label>
