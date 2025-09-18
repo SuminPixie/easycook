@@ -34,7 +34,7 @@ if ($row = $res->fetch_assoc()) {
 
   // 아바타가 왔다면 다운받아 교체 시도
   if ($avatar !== '') {
-    $uploadDir = '../uploads/profile/';
+    $uploadDir = './uploads/profile/';
     if (!is_dir($uploadDir)) { @mkdir($uploadDir, 0777, true); }
 
     $path = parse_url($avatar, PHP_URL_PATH);
@@ -82,7 +82,7 @@ $teacher_code = isset($_SESSION['teacher_code']) ? trim((string)$_SESSION['teach
 
 // 아바타 저장 시도
 if ($avatar !== '') {
-  $uploadDir = '../uploads/profile/';
+  $uploadDir = './uploads/profile/';
   if (!is_dir($uploadDir)) { @mkdir($uploadDir, 0777, true); }
 
   $path = parse_url($avatar, PHP_URL_PATH);
@@ -126,11 +126,20 @@ if ($stmtIns->execute()) {
   $_SESSION['profile']      = $profile_file;
   $_SESSION['teacher_code'] = $teacher_code;
 
-  // (선택) 강사코드 1회성이라면 다음 줄 주석 해제해서 제거
-  // unset($_SESSION['teacher_code']);
+  // (선택) 1회성이라면 다음 라인 해제
+  // if ($teacher_code) unset($_SESSION['teacher_code']);
 
   $redirect = ($teacher_code !== '') ? './admin/index.php' : './index.php';
-  echo json_encode(['success'=>true, 'redirect'=>$redirect]);
+
+  // ✅ 신규 가입 성공 메시지 포함
+  echo json_encode([
+    'success'  => true,
+    'redirect' => $redirect,
+    'message'  => '카카오 회원가입 성공'
+  ]);
+  exit;
 } else {
   echo json_encode(['success'=>false, 'message'=>'회원가입 실패: '.$conn->error]);
+  exit;
 }
+
