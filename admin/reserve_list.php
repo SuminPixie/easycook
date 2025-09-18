@@ -78,12 +78,24 @@
                 if (mysqli_num_rows($result) > 0) {
                   while ($db = mysqli_fetch_array($result)) { ?>
                   <div class="reserve_time">
-                    <input type="checkbox" id="time<?php echo $db[0]*1 ?>">
-                    <label for="time<?php echo $db[0]*1 ?>">
+                    <input type="checkbox" id="time<?php echo $db[0]*1+9 ?>">
+                    <label for="time<?php echo $db[0]*1+9 ?>">
+                      <?php
+                      $raw = $db[0] ?? ''; 
+                      if (is_numeric($raw)) {
+                        $h = (int)$raw;
+                      } else {
+                        $ts = strtotime($raw);
+                        $h = ($ts !== false) ? (int)date('H', $ts) : 0;
+                      }
+
+                      $start = sprintf('%02d:00', $h);
+                      $end   = sprintf('%02d:00', ($h + 1) % 24);
+                      $cnt   = (int)($db[1] ?? 0);
+                      ?>
                       <ul>
-                        <?php $h = (int)(is_string($db[0]) ? explode(':', $db[0])[0] : $db[0]); ?>
-                        <li><?php echo sprintf('%02d:00', $h); ?> ~ <?php echo sprintf('%02d:00', ($h + 1) % 24); ?></li>
-                        <li><span style="color:var(--red); font-weight:bold;"><?php echo $db[1] ?></span> / 8</li>
+                        <li><?= $start ?> ~ <?= $end ?></li>
+                        <li><span style="color:var(--red); font-weight:bold;"><?= $cnt ?></span> / 8</li>
                       </ul>
                     </label>
                     <div class="reserve_p">
