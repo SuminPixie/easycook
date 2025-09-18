@@ -101,7 +101,7 @@
       const body = Object.assign({}, kakaoPayload, { role: 'user' });
 
       try {
-        const resp = await fetch('/act/kakao_login.php', {
+        const resp = await fetch('./act/kakao_login.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include'
