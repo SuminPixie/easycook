@@ -98,7 +98,7 @@ $(document).ready(function() {
 
           // 카카오 통합 로그인/가입 호출 (role=teacher + staff_no 포함)
           $.ajax({
-            url: '/act/kakao_login.php',
+            url: './act/kakao_login.php',
             method: 'POST',
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
@@ -111,7 +111,7 @@ $(document).ready(function() {
           .done(function(data) {
             if (data && data.success) {
               sessionStorage.removeItem('kakaoPayload');
-              window.location.href = data.redirect || '/';
+              window.location.href = data.redirect || './index.php';
             } else {
               alert((data && data.message) || '처리 실패');
             }
