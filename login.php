@@ -273,7 +273,7 @@ if (!empty($_SESSION['id'])) {
 
   function kakaoLogin() {
     Kakao.Auth.login({
-      scope: 'profile_nickname, profile_image, account_email',
+      scope: 'profile_nickname, profile_image',
       success: function (auth) {
         Kakao.API.request({ url: '/v2/user/me' })
           .then(function(res){
